@@ -14,10 +14,10 @@
 <meta name="author" content="
 作者:&nbsp;Mingyu">
 <link rel="canonical" href="https://lmingyul.github.io/posts/tech/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8efbea431b2b39b9f82e54b1cbcf96482593dc7006442b1466ca99668a79a5ff.css" integrity="sha256-jvvqQxsrObn4LlSxy8&#43;WSCWT3HAGRCsUZsqZZop5pf8=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://lmingyul.github.io/img/Q.gif">
-<link rel="icon" type="image/png" sizes="16x16" href="https://lmingyul.github.io/img/Q.gif">
-<link rel="icon" type="image/png" sizes="32x32" href="https://lmingyul.github.io/img/Q.gif">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.e51f2bbeebf49a16882d47d54d99eefe5c9192727e0ff926042b354a6827eb1c.css" integrity="sha256-5R8rvuv0mhaILUfVTZnu/lyRknJ&#43;D/kmBCs1Smgn6xw=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://lmingyul.github.io/img/top.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lmingyul.github.io/img/top.webp">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lmingyul.github.io/img/top.webp">
 <link rel="apple-touch-icon" href="https://lmingyul.github.io/Q.gif">
 <link rel="mask-icon" href="https://lmingyul.github.io/Q.gif">
 <meta name="theme-color" content="#2e2e33">
@@ -27,34 +27,6 @@
         #theme-toggle,
         .top-link {
             display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
         }
 
     </style>
@@ -126,7 +98,7 @@
     "name": "Mingyu's Blog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://lmingyul.github.io/img/Q.gif"
+      "url": "https://lmingyul.github.io/img/top.webp"
     }
   }
 }
@@ -136,10 +108,6 @@
 <body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
     }
 

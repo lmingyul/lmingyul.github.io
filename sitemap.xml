@@ -23,8 +23,8 @@
     <loc>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8surge%E6%8A%8Amac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</loc>
     <lastmod>2022-07-05T22:20:17+08:00</lastmod>
   </url><url>
-    <loc>http://www.lmingyu.tech/categories/</loc>
-    <lastmod>2022-06-26T23:54:36+08:00</lastmod>
+    <loc>http://www.lmingyu.tech/tags/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2022-07-05T22:20:17+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/tags/linux/</loc>
     <lastmod>2022-06-26T23:54:36+08:00</lastmod>
@@ -32,13 +32,10 @@
     <loc>http://www.lmingyu.tech/posts/tech/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2022-06-26T23:54:36+08:00</lastmod>
   </url><url>
-    <loc>http://www.lmingyu.tech/categories/%E5%88%86%E7%B1%BB1/</loc>
-    <lastmod>2022-06-26T23:54:36+08:00</lastmod>
-  </url><url>
-    <loc>http://www.lmingyu.tech/categories/%E5%88%86%E7%B1%BB2/</loc>
-    <lastmod>2022-06-26T23:54:36+08:00</lastmod>
-  </url><url>
     <loc>http://www.lmingyu.tech/tags/%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2022-06-26T23:54:36+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-06-26T23:54:36+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/links/</loc>
@@ -49,6 +46,8 @@
     <loc>http://www.lmingyu.tech/about/</loc>
   </url><url>
     <loc>http://www.lmingyu.tech/posts/read/</loc>
+  </url><url>
+    <loc>http://www.lmingyu.tech/categories/</loc>
   </url><url>
     <loc>http://www.lmingyu.tech/series/</loc>
   </url><url>

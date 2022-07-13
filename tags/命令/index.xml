@@ -13,7 +13,7 @@
       <pubDate>Sun, 26 Jun 2022 23:54:36 +0800</pubDate>
       
       <guid>http://www.lmingyu.tech/posts/tech/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>文件操作命令 cd - ls 列出当前目录下所有文件 ls -a 显示所有文件 ls -lht 显示目录中的文件按照修改时间排序 chmod 修改文件权限 chmod +x xxx：给xxx添加可执行权限</description>
+      <description>记录自己日常开发常用的 Linux 命令</description>
     </item>
     
   </channel>

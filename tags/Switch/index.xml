@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Switch on Mingyu&#39;s Blog</title>
-    <link>http://www.lmingyu.tech/tags/switch/</link>
+    <link>http://www.lmingyu.tech/tags/Switch/</link>
     <description>Recent content in Switch on Mingyu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 Jul 2022 15:03:17 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/tags/switch/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jul 2022 15:03:17 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/tags/Switch/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>利用 Surge 把 Mac 变成家中网络枢纽</title>
-      <link>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8surge%E6%8A%8Amac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</link>
+      <link>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8Surge%E6%8A%8AMac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</link>
       <pubDate>Sat, 02 Jul 2022 15:03:17 +0800</pubDate>
       
-      <guid>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8surge%E6%8A%8Amac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</guid>
+      <guid>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8Surge%E6%8A%8AMac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文记录如何使用 Surge 将家中的 Mac 电脑成为家中其他设备科学上网的中转站。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

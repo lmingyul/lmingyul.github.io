@@ -6,24 +6,25 @@
     <description>Recent content in 💻技术 on Mingyu&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <copyright>Mingyu</copyright>
     <lastBuildDate>Sat, 02 Jul 2022 15:03:17 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/posts/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>利用 Surge 把 Mac 变成家中网络枢纽</title>
-      <link>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8Surge%E6%8A%8AMac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</link>
+      <title>利用Surge把Mac变成家中网络枢纽</title>
+      <link>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8surge%E6%8A%8Amac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</link>
       <pubDate>Sat, 02 Jul 2022 15:03:17 +0800</pubDate>
       
-      <guid>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8Surge%E6%8A%8AMac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</guid>
+      <guid>http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8surge%E6%8A%8Amac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文记录如何使用 Surge 将家中的 Mac 电脑成为家中其他设备科学上网的中转站。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
     <item>
-      <title>常用系列-Linux常用命令</title>
-      <link>http://www.lmingyu.tech/posts/tech/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <title>常用系列-Linux 常用命令</title>
+      <link>http://www.lmingyu.tech/posts/tech/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 26 Jun 2022 23:54:36 +0800</pubDate>
       
-      <guid>http://www.lmingyu.tech/posts/tech/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <guid>http://www.lmingyu.tech/posts/tech/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;常用系列就是记录自己编程常用的东西，此文为常用系列第 1 篇，用于记录自己日常开发编程时常用的 Linux 命令，以便需要时查找。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

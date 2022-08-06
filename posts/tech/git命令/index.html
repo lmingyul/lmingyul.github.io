@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>常用系列-Git命令 | Mingyu&#39;s Blog</title>
+<meta name="keywords" content="Git, 命令, 常用系列">
+<meta name="description" content="
+常用系列就是记录自己编程常用的东西，此文为常用系列第 2 篇，用于记录自己日常常用的 Git 命令，以便需要时查找。Git 尽管提供了 GUI 界面进行操作，但是我觉得 Git 的 GUI 软件有很多，但是掌握最常用的命令还是一个合格的程序员应该做的，毕竟命令到哪里都一样，但 GUI 软件万一哪一天用不了了呢🐶，而且命令行模式可以执行 Git 的所有命令。
+">
+<meta name="author" content="
+作者:&nbsp;Mingyu">
+<link rel="canonical" href="http://www.lmingyu.tech/posts/tech/git%E5%91%BD%E4%BB%A4/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7d87f88347767e49344eb98fab32bd4800afc9c19493a2bdb9ceed8ddfb0fedf.css" integrity="sha256-fYf4g0d2fkk0TrmPqzK9SACvycGUk6K9uc7tjd&#43;w/t8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="icon" type="image/png" sizes="32x32" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="apple-touch-icon" href="http://www.lmingyu.tech/Q.gif">
+<link rel="mask-icon" href="http://www.lmingyu.tech/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="常用系列-Git命令" />
+<meta property="og:description" content="
+常用系列就是记录自己编程常用的东西，此文为常用系列第 2 篇，用于记录自己日常常用的 Git 命令，以便需要时查找。Git 尽管提供了 GUI 界面进行操作，但是我觉得 Git 的 GUI 软件有很多，但是掌握最常用的命令还是一个合格的程序员应该做的，毕竟命令到哪里都一样，但 GUI 软件万一哪一天用不了了呢🐶，而且命令行模式可以执行 Git 的所有命令。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.lmingyu.tech/posts/tech/git%E5%91%BD%E4%BB%A4/" />
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/amBHJy-2022-08-06-005348.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-06T00:43:04&#43;08:00" />
+<meta property="article:modified_time" content="2022-08-06T00:43:04&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/amBHJy-2022-08-06-005348.png" />
+<meta name="twitter:title" content="常用系列-Git命令"/>
+<meta name="twitter:description" content="
+常用系列就是记录自己编程常用的东西，此文为常用系列第 2 篇，用于记录自己日常常用的 Git 命令，以便需要时查找。Git 尽管提供了 GUI 界面进行操作，但是我觉得 Git 的 GUI 软件有很多，但是掌握最常用的命令还是一个合格的程序员应该做的，毕竟命令到哪里都一样，但 GUI 软件万一哪一天用不了了呢🐶，而且命令行模式可以执行 Git 的所有命令。
+"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "http://www.lmingyu.tech/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "💻技术",
+      "item": "http://www.lmingyu.tech/posts/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "常用系列-Git命令",
+      "item": "http://www.lmingyu.tech/posts/tech/git%E5%91%BD%E4%BB%A4/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "常用系列-Git命令",
+  "name": "常用系列-Git命令",
+  "description": " 常用系列就是记录自己编程常用的东西，此文为常用系列第 2 篇，用于记录自己日常常用的 Git 命令，以便需要时查找。Git 尽管提供了 GUI 界面进行操作，但是我觉得 Git 的 GUI 软件有很多，但是掌握最常用的命令还是一个合格的程序员应该做的，毕竟命令到哪里都一样，但 GUI 软件万一哪一天用不了了呢🐶，而且命令行模式可以执行 Git 的所有命令。\n",
+  "keywords": [
+    "Git", "命令", "常用系列"
+  ],
+  "articleBody": " 常用系列就是记录自己编程常用的东西，此文为常用系列第 2 篇，用于记录自己日常常用的 Git 命令，以便需要时查找。Git 尽管提供了 GUI 界面进行操作，但是我觉得 Git 的 GUI 软件有很多，但是掌握最常用的命令还是一个合格的程序员应该做的，毕竟命令到哪里都一样，但 GUI 软件万一哪一天用不了了呢🐶，而且命令行模式可以执行 Git 的所有命令。\nGit 最基本的操作 文件从本地到仓库流程：以下记录一下用哪些命令可以将一个文件从自己的本地推送到远端的仓库，我把这称为基本操作\n安装 Git 如果想要在 Mac 电脑安装 Git，只需要输入查询 git 版本的命令就会提示你安装（如果你之前没装过的话）\ngit --version 配置用户信息 安装完 git 之后对 git 的环境进行配置，这些配置在每台计算机只需要配置一次，当然配置完以后也可以修改，git 最常用的配置就是对用户名和邮箱地址的设置，--global代表对系统上所有仓库都生效。\n# 设置用户签名，可在 .gitconfig 文件中查看 git config --global user.name \u003c用户名\u003e # 设置用户邮箱，可在 .gitconfig 文件中查看 git config --global user.email \u003c注册git仓库邮箱\u003e 获取 Git 仓库 通常获取仓库有两种方式：\n将本地目录转换为 Git 仓库 从别的地方复制一个仓库到你的本地 在已存在目录中初始化仓库 git init 这个命令会在当前目录下创建一个.git的目录，目录中包括初始化仓库的所有文件\n克隆仓库 git clone https://github.com/libgit2/libgit2 这个命令会从远端 GitHub 的 libgit2 仓库拉取所有东西到你当前目录\n记录文件状态 文件的状态有 2 种：已被跟踪、未被跟踪，跟踪的意思是现在 git 可以记录这个文件发生的所有变化（被修改、被删除、重命名）\n查询文件状态 git status # 简洁输出文件状态，A-先添加到暂存区、M-修改过的文件、D-删掉的文件、R-重命名的文件、??-未被跟踪的文件 git status -s 跟踪新文件 # 使用以下命令之后，一般都会再使用 git status 查看文件是否被跟踪 git add \u003c文件名\u003e # 将所有待加入暂存区的文件加入暂存区 git add . 使用该命令之后，文件就会被放入 git 的暂存区，暂存区里面的文件都是即将要推送到远端仓库的候选者。\n对比已暂存的文件与未暂存文件之间的区别 通常我们修改文件过多时就会容易忘记某个文件修改过的内容，这个时候就需要查看我们做过哪些修改就可以使用diff命令\n# 文件需在暂存区，即被跟踪才能使用本命令 git diff \u003c文件名\u003e 如果你想对比暂存区里的文件与上次提交时文件的区别，就可以使用以下命令\ngit diff --cached 提交更新 如果你的暂存区里面已经包括你本次想要提交的文件，就可以通过commit命令对文件的修改进行提交\n# 每次commit都会清空暂存区 git commit -m \"\u003c双引号里面填的是本次提交文件的一个描述信息\u003e\" 推送文件到远端 添加远端仓库 如果你不是从远端仓库克隆 clone 的文件，而是自己在本地自己创建的 git 仓库，就需要在向远端仓库推送之前加上你要推送的仓库\ngit remote add https://github.com/paulboone/ticgit 推送 git push origin master 这个命令代表着将 master 分支的代码推送到远端的 origin 服务器\n到此一个文件从创建到最终同步到远端仓库的这个过程就圆满完成。\n下面就记录一下在使用 git 的过程中遇到一些情况该使用哪些命令。\n查询 这里的记录是使用 git 场景下各种需要查的情况\n查提交历史 整个项目历史提交记录 git log commit ca82a6dff817ec66f44342007202690a93763949 Author: Scott Chacon Date: Mon Mar 17 21:52:11 2008 -0700 changed the version number commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 Author: Scott Chacon Date: Sat Mar 15 16:40:33 2008 -0700 removed unnecessary test # 以一行的形式展示过往所有的提交 git log --pretty=oneline # 分支提交图 git log --graph git log --graph --pretty=oneline --abbrev-commit 输出的内容依次是：\n每个提交的 SHA-1 校验和 提交人的名字 邮箱地址 提交时间 提交说明 文件的历史提交记录 查看单个文件每次的提交记录\ngit log -p \u003c文件名\u003e # 只显示最近 2 次提交 git log -p -2 \u003c文件名\u003e 每一行的提交记录 能显示任何文件中每行最后一次修改的提交记录\ngit blame \u003c文件名\u003e # 限定显示哪一行 git blame -L 69,82 \u003c文件名\u003e 查找BUG 很多时候，当前分支出现问题了，但不清楚哪里出现了问题，就可以使用git bisect命令查找哪一次代码提交引入了错误\n这个命令使用的原理是二分查找的原理：\n通过二分【代码是没问题的提交 ~ 当前有问题的分支】这个范围找到可能有问题的那一次提交\ngit bisect start命令启动查错，它的格式如下:\n$ git bisect start [终点] [起点] 终点是最近的提交，起点是更久以前的提交。它们之间的这段历史，就是差错的范围\n当不清楚哪个起点提交时没问题的时候可以选择最开始的分支\n# 终点是当期分支 HEAD，起点是第一次提交 4d83cf git bisect start HEAD 4d83cf 执行上面的命令以后，当前的代码就会切换到这段范围当中中间的那一次提交\n然后你就可以对当前代码进行测试，如果是没有问题就执行以下命令对本次提交进行标识\ngit bisect good 如果没问题就意味着错误是在代码历史的后半段引入的。执行上面的命令，Git 就自动切换到后半段的中点\n然后再进行测试，如果是有问题的就标识这个提交是有问题的\ngit bisect bad 到这里不是就结束了哦，有问题只是这次有问题，但我们需要找到第一次有问题的提交\n接下来，不断重复这个过程，直到成功找到出问题的那一次提交为止。这时，Git 会给出如下的提示。\nb47892 is the first bad commit 然后就可以去分析这次都提交了哪些文件，从而分析错误是什么原因引起的\n注意：代码缺陷需要自己去判断的，git 是没办法帮你分析出哪里有问题\n然后，使用git bisect reset命令，退出查错，回到最近一次的代码提交。\n查找内容 由于 git 与 Linux命令一样，同样可以与 grep搭配使用\ngit grep -n \"\" 撤销 我们在操作 Git 的时候难免会出现出错的时候，修改错误的办法一般不是重新修改就是回退到没问题的时候\n文件的撤销 将文件尚未加入暂存区的修改全部撤销 # -- 很重要，没有--，就变成了“切换到另一个分支”的命令 git checkout -- \u003c文件名\u003e # 恢复暂存区的所有文件到工作区 git checkout . # 恢复 commit 的指定文件到暂存区和工作区 git checkout [commit] [file] 将工作区相对于暂存区的修改撤销，如果暂存区没有对应的文件则回退到HEAD指向的版本 git restore \u003c文件名\u003e 将暂存区的文件修改撤销掉（unstage），重新放回工作区 git reset HEAD \u003c文件名\u003e 版本的撤销 常用于提交版本之后，远端发生冲突无法 merge 分支，用git resrt回退版本处理完冲突后再进行推送\n# 将commit过的代码库回滚到上一个版本 git reset --hard HEAD^ 或 git reset --hard HEAD~ # 往上回滚两次版本，以此类推 git reset --hard HEAD^^： # 往上回滚100个版本 git reset --hard HEAD~100： # 回滚到某一特定版本，版本号为前7位，使用git reflog可以查出 git reset --hard 版本号： 分支操作 分支基本操作 # 列出所有本地分支，当前分支前面会标一个*号 $ git branch # 列出所有远程分支 $ git branch -r # 列出所有本地分支和远程分支，并详细展示分支信息 $ git branch -av # 新建一个分支，并切换到该分支 $ git checkout -b [branch] # 切换到指定分支，并更新工作区 $ git checkout [branch-name] # 切换到上一个分支 $ git checkout - # 删除分支 $ git branch -d [branch-name] merge 用于合并两个分支\n# 合并指定分支到当前分支 $ git merge [branch] rebase 也用于分支合并\n合并分支的操作与merge基本一样，\n# 合并指定分支到当前分支 git rebase [branch] 如果git rebase遇到冲突:\n第一步手动解决冲突，然后把新修改的文件加入暂存区 git add . 之后并不需要 git commit，而是直接运行git rebase --continue 至于git merge 与 git rebase有什么区别呢？\ngit merge合并完之后会显示出来合并之前的分支，而git rebase合并之后看起来并不会有之前合并的分支记录 分支合并的顺序也不一样 详细可以看一下这个博客 git merge 和 git rebase 小结\ncherry-pick 合并指定提交到当前分支\n# 选择一个 commit，合并进当前分支 git cherry-pick [commit] # 合并多次提交到当前分支 git cherry-pick # 合并联系一段的提交，A 提交必须早于 B，提交 A 不会包含本次提交 git cherry-pick A..B # 合并联系一段的提交，A 提交必须早于 B，本次提交包含提交 A git cherry-pick A^..B 如果 cherry-pick过程中发送冲突，则在手动处理完冲突之后使用--continue命令让过程继续\n解决代码冲突后，将修改的文件重新加入暂存区git add . 使用下面的命令，让 Cherry pick 过程继续执行。 git cherry-pick --continue 参考资料 Git 官网\ngit bisect 命令教程\ngit cherry-pick 教程\nGit 教程-开发者手册\n一个一步一步显示 git 命令的网站\n",
+  "wordCount" : "3153",
+  "inLanguage": "en",
+  "image":"https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/amBHJy-2022-08-06-005348.png","datePublished": "2022-08-06T00:43:04+08:00",
+  "dateModified": "2022-08-06T00:43:04+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Mingyu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://www.lmingyu.tech/posts/tech/git%E5%91%BD%E4%BB%A4/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mingyu's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://www.lmingyu.tech/img/top.webp"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://www.lmingyu.tech" accesskey="h" title="Mingyu&#39;s Blog (Alt + H)">Mingyu&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://www.lmingyu.tech/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+    <header class="post-header">
+        <div class="breadcrumbs"><a href="http://www.lmingyu.tech">Home</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/">📚文章</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/tech/">💻技术</a></div>
+        <h1 class="post-title">
+            常用系列-Git命令
+        </h1>
+        <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+创建:&nbsp;<span title='2022-08-06 00:43:04 +0800 +0800'>2022-08-06</span>&nbsp;|&nbsp;更新:&nbsp;2022-08-06&nbsp;|&nbsp;字数:&nbsp;3153&nbsp;字&nbsp;|&nbsp;阅读约耗时: 7&nbsp;分钟&nbsp;|&nbsp;
+作者:&nbsp;Mingyu
+
+|&nbsp;本文被浏览了&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;次
+        </div>
+    </header> 
+<figure class="entry-cover1"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/amBHJy-2022-08-06-005348.png" alt="">
+        
+</figure><aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
+
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#git-%e6%9c%80%e5%9f%ba%e6%9c%ac%e7%9a%84%e6%93%8d%e4%bd%9c" aria-label="Git 最基本的操作">Git 最基本的操作</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%ae%89%e8%a3%85-git" aria-label="安装 Git">安装 Git</a></li>
+                    <li>
+                        <a href="#%e9%85%8d%e7%bd%ae%e7%94%a8%e6%88%b7%e4%bf%a1%e6%81%af" aria-label="配置用户信息">配置用户信息</a></li>
+                    <li>
+                        <a href="#%e8%8e%b7%e5%8f%96-git-%e4%bb%93%e5%ba%93" aria-label="获取 Git 仓库">获取 Git 仓库</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%9c%a8%e5%b7%b2%e5%ad%98%e5%9c%a8%e7%9b%ae%e5%bd%95%e4%b8%ad%e5%88%9d%e5%a7%8b%e5%8c%96%e4%bb%93%e5%ba%93" aria-label="在已存在目录中初始化仓库">在已存在目录中初始化仓库</a></li>
+                    <li>
+                        <a href="#%e5%85%8b%e9%9a%86%e4%bb%93%e5%ba%93" aria-label="克隆仓库">克隆仓库</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e8%ae%b0%e5%bd%95%e6%96%87%e4%bb%b6%e7%8a%b6%e6%80%81" aria-label="记录文件状态">记录文件状态</a><ul>
+                            
+                    <li>
+                        <a href="#%e6%9f%a5%e8%af%a2%e6%96%87%e4%bb%b6%e7%8a%b6%e6%80%81" aria-label="查询文件状态">查询文件状态</a></li>
+                    <li>
+                        <a href="#%e8%b7%9f%e8%b8%aa%e6%96%b0%e6%96%87%e4%bb%b6" aria-label="跟踪新文件">跟踪新文件</a></li>
+                    <li>
+                        <a href="#%e5%af%b9%e6%af%94%e5%b7%b2%e6%9a%82%e5%ad%98%e7%9a%84%e6%96%87%e4%bb%b6%e4%b8%8e%e6%9c%aa%e6%9a%82%e5%ad%98%e6%96%87%e4%bb%b6%e4%b9%8b%e9%97%b4%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="对比已暂存的文件与未暂存文件之间的区别">对比已暂存的文件与未暂存文件之间的区别</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e6%8f%90%e4%ba%a4%e6%9b%b4%e6%96%b0" aria-label="提交更新">提交更新</a></li>
+                    <li>
+                        <a href="#%e6%8e%a8%e9%80%81%e6%96%87%e4%bb%b6%e5%88%b0%e8%bf%9c%e7%ab%af" aria-label="推送文件到远端">推送文件到远端</a><ul>
+                            
+                    <li>
+                        <a href="#%e6%b7%bb%e5%8a%a0%e8%bf%9c%e7%ab%af%e4%bb%93%e5%ba%93" aria-label="添加远端仓库">添加远端仓库</a></li>
+                    <li>
+                        <a href="#%e6%8e%a8%e9%80%81" aria-label="推送">推送</a></li></ul>
+                    </li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e6%9f%a5%e8%af%a2" aria-label="查询">查询</a><ul>
+                            
+                    <li>
+                        <a href="#%e6%9f%a5%e6%8f%90%e4%ba%a4%e5%8e%86%e5%8f%b2" aria-label="查提交历史">查提交历史</a><ul>
+                            
+                    <li>
+                        <a href="#%e6%95%b4%e4%b8%aa%e9%a1%b9%e7%9b%ae%e5%8e%86%e5%8f%b2%e6%8f%90%e4%ba%a4%e8%ae%b0%e5%bd%95" aria-label="整个项目历史提交记录">整个项目历史提交记录</a></li>
+                    <li>
+                        <a href="#%e6%96%87%e4%bb%b6%e7%9a%84%e5%8e%86%e5%8f%b2%e6%8f%90%e4%ba%a4%e8%ae%b0%e5%bd%95" aria-label="文件的历史提交记录">文件的历史提交记录</a></li>
+                    <li>
+                        <a href="#%e6%af%8f%e4%b8%80%e8%a1%8c%e7%9a%84%e6%8f%90%e4%ba%a4%e8%ae%b0%e5%bd%95" aria-label="每一行的提交记录">每一行的提交记录</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e6%9f%a5%e6%89%bebug" aria-label="查找BUG">查找BUG</a></li>
+                    <li>
+                        <a href="#%e6%9f%a5%e6%89%be%e5%86%85%e5%ae%b9" aria-label="查找内容">查找内容</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e6%92%a4%e9%94%80" aria-label="撤销">撤销</a><ul>
+                            
+                    <li>
+                        <a href="#%e6%96%87%e4%bb%b6%e7%9a%84%e6%92%a4%e9%94%80" aria-label="文件的撤销">文件的撤销</a></li>
+                    <li>
+                        <a href="#%e7%89%88%e6%9c%ac%e7%9a%84%e6%92%a4%e9%94%80" aria-label="版本的撤销">版本的撤销</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e5%88%86%e6%94%af%e6%93%8d%e4%bd%9c" aria-label="分支操作">分支操作</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%88%86%e6%94%af%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c" aria-label="分支基本操作">分支基本操作</a></li>
+                    <li>
+                        <a href="#merge" aria-label="merge">merge</a></li>
+                    <li>
+                        <a href="#rebase" aria-label="rebase">rebase</a></li>
+                    <li>
+                        <a href="#cherry-pick" aria-label="cherry-pick">cherry-pick</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" aria-label="参考资料">参考资料</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
+    <div class="post-content"><blockquote>
+<p>常用系列就是记录自己编程常用的东西，此文为常用系列第 2 篇，用于记录自己日常常用的 Git 命令，以便需要时查找。Git 尽管提供了 GUI 界面进行操作，但是我觉得 Git 的 GUI 软件有很多，但是掌握最常用的命令还是一个合格的程序员应该做的，毕竟命令到哪里都一样，但 GUI 软件万一哪一天用不了了呢🐶，而且命令行模式可以执行 Git 的<strong>所有命令</strong>。</p>
+</blockquote>
+<h1 id="git-最基本的操作">Git 最基本的操作<a hidden class="anchor" aria-hidden="true" href="#git-最基本的操作">#</a></h1>
+<blockquote>
+<p>文件从本地到仓库流程：以下记录一下用哪些命令可以将一个文件从自己的本地推送到远端的仓库，我把这称为<strong>基本操作</strong></p>
+</blockquote>
+<h2 id="安装-git">安装 Git<a hidden class="anchor" aria-hidden="true" href="#安装-git">#</a></h2>
+<blockquote>
+<p>如果想要在 Mac 电脑安装 Git，只需要输入查询 git 版本的命令就会提示你安装（如果你之前没装过的话）</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git --version
+</span></span></code></pre></div><h2 id="配置用户信息">配置用户信息<a hidden class="anchor" aria-hidden="true" href="#配置用户信息">#</a></h2>
+<blockquote>
+<p>安装完 git 之后对 git 的环境进行配置，这些配置在每台计算机只需要配置一次，当然配置完以后也可以修改，git 最常用的配置就是对用户名和邮箱地址的设置，<code>--global</code>代表对系统上所有仓库都生效。</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 设置用户签名，可在 .gitconfig 文件中查看</span>
+</span></span><span style="display:flex;"><span>git config --global user.name &lt;用户名&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 设置用户邮箱，可在 .gitconfig 文件中查看</span>
+</span></span><span style="display:flex;"><span>git config --global user.email &lt;注册git仓库邮箱&gt;   
+</span></span></code></pre></div><h2 id="获取-git-仓库">获取 Git 仓库<a hidden class="anchor" aria-hidden="true" href="#获取-git-仓库">#</a></h2>
+<blockquote>
+<p>通常获取仓库有两种方式：</p>
+<ul>
+<li>将本地目录转换为 Git 仓库</li>
+<li>从别的地方复制一个仓库到你的本地</li>
+</ul>
+</blockquote>
+<h3 id="在已存在目录中初始化仓库">在已存在目录中初始化仓库<a hidden class="anchor" aria-hidden="true" href="#在已存在目录中初始化仓库">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git init
+</span></span></code></pre></div><p>这个命令会在当前目录下创建一个<code>.git</code>的目录，目录中包括初始化仓库的所有文件</p>
+<h3 id="克隆仓库">克隆仓库<a hidden class="anchor" aria-hidden="true" href="#克隆仓库">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/libgit2/libgit2
+</span></span></code></pre></div><p>这个命令会从远端 GitHub 的 libgit2 仓库拉取所有东西到你当前目录</p>
+<h2 id="记录文件状态">记录文件状态<a hidden class="anchor" aria-hidden="true" href="#记录文件状态">#</a></h2>
+<blockquote>
+<p>文件的状态有 2 种：已被跟踪、未被跟踪，跟踪的意思是现在 git 可以记录这个文件发生的所有变化（被修改、被删除、重命名）</p>
+</blockquote>
+<h3 id="查询文件状态">查询文件状态<a hidden class="anchor" aria-hidden="true" href="#查询文件状态">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 简洁输出文件状态，A-先添加到暂存区、M-修改过的文件、D-删掉的文件、R-重命名的文件、??-未被跟踪的文件</span>
+</span></span><span style="display:flex;"><span>git status -s
+</span></span></code></pre></div><h3 id="跟踪新文件">跟踪新文件<a hidden class="anchor" aria-hidden="true" href="#跟踪新文件">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 使用以下命令之后，一般都会再使用 git status 查看文件是否被跟踪</span>
+</span></span><span style="display:flex;"><span>git add &lt;文件名&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 将所有待加入暂存区的文件加入暂存区</span>
+</span></span><span style="display:flex;"><span>git add . 
+</span></span></code></pre></div><p>使用该命令之后，文件就会被放入 git 的暂存区，暂存区里面的文件都是即将要推送到远端仓库的候选者。</p>
+<h3 id="对比已暂存的文件与未暂存文件之间的区别">对比已暂存的文件与未暂存文件之间的区别<a hidden class="anchor" aria-hidden="true" href="#对比已暂存的文件与未暂存文件之间的区别">#</a></h3>
+<blockquote>
+<p>通常我们修改文件过多时就会容易忘记某个文件修改过的内容，这个时候就需要查看我们做过哪些修改就可以使用<code>diff</code>命令</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 文件需在暂存区，即被跟踪才能使用本命令</span>
+</span></span><span style="display:flex;"><span>git diff &lt;文件名&gt;
+</span></span></code></pre></div><p>如果你想对比暂存区里的文件与上次提交时文件的区别，就可以使用以下命令</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git diff --cached
+</span></span></code></pre></div><h2 id="提交更新">提交更新<a hidden class="anchor" aria-hidden="true" href="#提交更新">#</a></h2>
+<blockquote>
+<p>如果你的暂存区里面已经包括你本次想要提交的文件，就可以通过<code>commit</code>命令对文件的修改进行提交</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 每次commit都会清空暂存区</span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#c41a16">&#34;&lt;双引号里面填的是本次提交文件的一个描述信息&gt;&#34;</span>
+</span></span></code></pre></div><h2 id="推送文件到远端">推送文件到远端<a hidden class="anchor" aria-hidden="true" href="#推送文件到远端">#</a></h2>
+<h3 id="添加远端仓库">添加远端仓库<a hidden class="anchor" aria-hidden="true" href="#添加远端仓库">#</a></h3>
+<blockquote>
+<p>如果你不是从远端仓库克隆 clone 的文件，而是自己在本地自己创建的 git 仓库，就需要在向远端仓库推送之前加上你要推送的仓库</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git remote add https://github.com/paulboone/ticgit
+</span></span></code></pre></div><h3 id="推送">推送<a hidden class="anchor" aria-hidden="true" href="#推送">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git push origin master
+</span></span></code></pre></div><p>这个命令代表着将 master 分支的代码推送到远端的 origin 服务器</p>
+<p><strong>到此一个文件从创建到最终同步到远端仓库的这个过程就圆满完成。</strong></p>
+<p>下面就记录一下在使用 git 的过程中遇到一些情况该使用哪些命令。</p>
+<hr>
+<h1 id="查询">查询<a hidden class="anchor" aria-hidden="true" href="#查询">#</a></h1>
+<blockquote>
+<p>这里的记录是使用 git 场景下各种需要查的情况</p>
+</blockquote>
+<h2 id="查提交历史">查提交历史<a hidden class="anchor" aria-hidden="true" href="#查提交历史">#</a></h2>
+<h3 id="整个项目历史提交记录">整个项目历史提交记录<a hidden class="anchor" aria-hidden="true" href="#整个项目历史提交记录">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>commit ca82a6dff817ec66f44342007202690a93763949 
+</span></span><span style="display:flex;"><span>Author: Scott Chacon &lt;schacon@gee-mail.com&gt; 
+</span></span><span style="display:flex;"><span>Date: Mon Mar <span style="color:#1c01ce">17</span> 21:52:11 <span style="color:#1c01ce">2008</span> -0700
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			changed the version number
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 
+</span></span><span style="display:flex;"><span>Author: Scott Chacon &lt;schacon@gee-mail.com&gt; 
+</span></span><span style="display:flex;"><span>Date: Sat Mar <span style="color:#1c01ce">15</span> 16:40:33 <span style="color:#1c01ce">2008</span> -0700
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			removed unnecessary <span style="color:#a90d91">test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 以一行的形式展示过往所有的提交</span>
+</span></span><span style="display:flex;"><span>git log --pretty<span style="color:#000">=</span>oneline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 分支提交图</span>
+</span></span><span style="display:flex;"><span>git log --graph
+</span></span><span style="display:flex;"><span>git log --graph --pretty<span style="color:#000">=</span>oneline --abbrev-commit
+</span></span></code></pre></div><p>输出的内容依次是：</p>
+<ul>
+<li>每个提交的 SHA-1 校验和</li>
+<li>提交人的名字</li>
+<li>邮箱地址</li>
+<li>提交时间</li>
+<li>提交说明</li>
+</ul>
+<h3 id="文件的历史提交记录">文件的历史提交记录<a hidden class="anchor" aria-hidden="true" href="#文件的历史提交记录">#</a></h3>
+<blockquote>
+<p>查看单个文件每次的提交记录</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git log -p &lt;文件名&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 只显示最近 2 次提交</span>
+</span></span><span style="display:flex;"><span>git log -p -2 &lt;文件名&gt;
+</span></span></code></pre></div><h3 id="每一行的提交记录">每一行的提交记录<a hidden class="anchor" aria-hidden="true" href="#每一行的提交记录">#</a></h3>
+<blockquote>
+<p>能显示任何文件中每行最后一次修改的提交记录</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git blame &lt;文件名&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 限定显示哪一行</span>
+</span></span><span style="display:flex;"><span>git blame -L 69,82 &lt;文件名&gt;
+</span></span></code></pre></div><h2 id="查找bug">查找BUG<a hidden class="anchor" aria-hidden="true" href="#查找bug">#</a></h2>
+<blockquote>
+<p>很多时候，当前分支出现问题了，但不清楚哪里出现了问题，就可以使用<code>git bisect</code>命令查找哪一次代码提交引入了错误</p>
+</blockquote>
+<p>这个命令使用的原理是二分查找的原理：</p>
+<p>通过二分【<strong>代码是没问题的提交</strong> ~ <strong>当前有问题的分支</strong>】这个范围找到可能有问题的那一次提交</p>
+<p><code>git bisect start</code>命令启动查错，它的格式如下:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ git bisect start <span style="color:#000">[</span>终点<span style="color:#000">]</span> <span style="color:#000">[</span>起点<span style="color:#000">]</span>
+</span></span></code></pre></div><p><strong>终点</strong>是最近的提交，<strong>起点</strong>是更久以前的提交。它们之间的这段历史，就是差错的范围</p>
+<p>当不清楚哪个起点提交时没问题的时候可以选择最开始的分支</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 终点是当期分支 HEAD，起点是第一次提交 4d83cf</span>
+</span></span><span style="display:flex;"><span>git bisect start HEAD 4d83cf
+</span></span></code></pre></div><p>执行上面的命令以后，当前的代码就会切换到这段范围当中中间的那一次提交</p>
+<p>然后你就可以对当前代码进行测试，如果是没有问题就执行以下命令对本次提交进行标识</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git bisect good
+</span></span></code></pre></div><p>如果没问题就意味着错误是在代码历史的后半段引入的。执行上面的命令，Git 就自动切换到后半段的中点</p>
+<p>然后再进行测试，如果是有问题的就标识这个提交是有问题的</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git bisect bad
+</span></span></code></pre></div><p>到这里不是就结束了哦，有问题只是这次有问题，但我们需要找到第一次有问题的提交</p>
+<p>接下来，不断重复这个过程，直到成功找到出问题的那一次提交为止。这时，Git 会给出如下的提示。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>b47892 is the first bad commit
+</span></span></code></pre></div><p>然后就可以去分析这次都提交了哪些文件，从而分析错误是什么原因引起的</p>
+<p><strong>注意：代码缺陷需要自己去判断的，git 是没办法帮你分析出哪里有问题</strong></p>
+<p>然后，使用<code>git bisect reset</code>命令，退出查错，回到最近一次的代码提交。</p>
+<h2 id="查找内容">查找内容<a hidden class="anchor" aria-hidden="true" href="#查找内容">#</a></h2>
+<blockquote>
+<p>由于 git 与 Linux命令一样，同样可以与 <code>grep</code>搭配使用</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git grep -n <span style="color:#c41a16">&#34;&#34;</span>
+</span></span></code></pre></div><hr>
+<h1 id="撤销">撤销<a hidden class="anchor" aria-hidden="true" href="#撤销">#</a></h1>
+<blockquote>
+<p>我们在操作 Git 的时候难免会出现出错的时候，修改错误的办法一般不是重新修改就是回退到没问题的时候</p>
+</blockquote>
+<h2 id="文件的撤销">文件的撤销<a hidden class="anchor" aria-hidden="true" href="#文件的撤销">#</a></h2>
+<ol>
+<li>将文件尚未加入暂存区的修改全部撤销</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># -- 很重要，没有--，就变成了“切换到另一个分支”的命令 </span>
+</span></span><span style="display:flex;"><span>git checkout -- &lt;文件名&gt; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 恢复暂存区的所有文件到工作区</span>
+</span></span><span style="display:flex;"><span>git checkout .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 恢复 commit 的指定文件到暂存区和工作区</span>
+</span></span><span style="display:flex;"><span>git checkout <span style="color:#000">[</span>commit<span style="color:#000">]</span> <span style="color:#000">[</span>file<span style="color:#000">]</span>
+</span></span></code></pre></div><ol start="2">
+<li>将工作区相对于暂存区的修改撤销，如果暂存区没有对应的文件则回退到HEAD指向的版本</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git restore &lt;文件名&gt;
+</span></span></code></pre></div><ol start="3">
+<li>将暂存区的文件修改撤销掉（unstage），重新放回工作区</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git reset HEAD &lt;文件名&gt;
+</span></span></code></pre></div><h2 id="版本的撤销">版本的撤销<a hidden class="anchor" aria-hidden="true" href="#版本的撤销">#</a></h2>
+<blockquote>
+<p>常用于提交版本之后，远端发生冲突无法 merge 分支，用<code>git resrt</code>回退版本处理完冲突后再进行推送</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 将commit过的代码库回滚到上一个版本</span>
+</span></span><span style="display:flex;"><span>git reset --hard HEAD^ 或 git reset --hard HEAD~   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 往上回滚两次版本，以此类推</span>
+</span></span><span style="display:flex;"><span>git reset --hard HEAD^^：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 往上回滚100个版本</span>
+</span></span><span style="display:flex;"><span>git reset --hard HEAD~100：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 回滚到某一特定版本，版本号为前7位，使用git reflog可以查出</span>
+</span></span><span style="display:flex;"><span>git reset --hard 版本号：
+</span></span></code></pre></div><hr>
+<h1 id="分支操作">分支操作<a hidden class="anchor" aria-hidden="true" href="#分支操作">#</a></h1>
+<h2 id="分支基本操作">分支基本操作<a hidden class="anchor" aria-hidden="true" href="#分支基本操作">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 列出所有本地分支，当前分支前面会标一个*号</span>
+</span></span><span style="display:flex;"><span>$ git branch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 列出所有远程分支</span>
+</span></span><span style="display:flex;"><span>$ git branch -r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 列出所有本地分支和远程分支，并详细展示分支信息</span>
+</span></span><span style="display:flex;"><span>$ git branch -av
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 新建一个分支，并切换到该分支</span>
+</span></span><span style="display:flex;"><span>$ git checkout -b <span style="color:#000">[</span>branch<span style="color:#000">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 切换到指定分支，并更新工作区</span>
+</span></span><span style="display:flex;"><span>$ git checkout <span style="color:#000">[</span>branch-name<span style="color:#000">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 切换到上一个分支</span>
+</span></span><span style="display:flex;"><span>$ git checkout -
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 删除分支</span>
+</span></span><span style="display:flex;"><span>$ git branch -d <span style="color:#000">[</span>branch-name<span style="color:#000">]</span>
+</span></span></code></pre></div><h2 id="merge">merge<a hidden class="anchor" aria-hidden="true" href="#merge">#</a></h2>
+<blockquote>
+<p>用于合并两个分支</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 合并指定分支到当前分支</span>
+</span></span><span style="display:flex;"><span>$ git merge <span style="color:#000">[</span>branch<span style="color:#000">]</span>
+</span></span></code></pre></div><h2 id="rebase">rebase<a hidden class="anchor" aria-hidden="true" href="#rebase">#</a></h2>
+<blockquote>
+<p>也用于分支合并</p>
+</blockquote>
+<p>合并分支的操作与merge基本一样，</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 合并指定分支到当前分支</span>
+</span></span><span style="display:flex;"><span>git rebase <span style="color:#000">[</span>branch<span style="color:#000">]</span>
+</span></span></code></pre></div><p>如果git rebase遇到冲突:</p>
+<ol>
+<li>第一步手动解决冲突，然后把新修改的文件加入暂存区 <code>git add .</code></li>
+<li>之后并不需要 <code>git commit</code>，而是直接运行<code>git rebase --continue</code></li>
+</ol>
+<p>至于<code>git merge</code> 与 <code>git rebase</code>有什么区别呢？</p>
+<ul>
+<li><code>git merge</code>合并完之后会显示出来合并之前的分支，而<code>git rebase</code>合并之后看起来并不会有之前合并的分支记录</li>
+<li>分支合并的顺序也不一样</li>
+</ul>
+<p>详细可以看一下这个博客 <a href="https://blog.csdn.net/wh_19910525/article/details/7554489">git merge 和 git rebase 小结</a></p>
+<h2 id="cherry-pick">cherry-pick<a hidden class="anchor" aria-hidden="true" href="#cherry-pick">#</a></h2>
+<blockquote>
+<p>合并指定提交到当前分支</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#177500"># 选择一个 commit，合并进当前分支</span>
+</span></span><span style="display:flex;"><span>git cherry-pick <span style="color:#000">[</span>commit<span style="color:#000">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 合并多次提交到当前分支</span>
+</span></span><span style="display:flex;"><span>git cherry-pick &lt;HashA&gt; &lt;HashB&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 合并联系一段的提交，A 提交必须早于 B，提交 A 不会包含本次提交</span>
+</span></span><span style="display:flex;"><span>git cherry-pick A..B 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 合并联系一段的提交，A 提交必须早于 B，本次提交包含提交 A</span>
+</span></span><span style="display:flex;"><span>git cherry-pick A^..B 
+</span></span></code></pre></div><p>如果 <code>cherry-pick</code>过程中发送冲突，则在手动处理完冲突之后使用<code>--continue</code>命令让过程继续</p>
+<ol>
+<li>解决代码冲突后，将修改的文件重新加入暂存区<code>git add .</code></li>
+<li>使用下面的命令，让 Cherry pick 过程继续执行。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> git cherry-pick --continue
+</span></span></code></pre></div><h1 id="参考资料">参考资料<a hidden class="anchor" aria-hidden="true" href="#参考资料">#</a></h1>
+<ul>
+<li>
+<p><a href="https://git-scm.com/book/zh/v2">Git 官网</a></p>
+</li>
+<li>
+<p><a href="http://www.ruanyifeng.com/blog/2018/12/git-bisect.html">git bisect 命令教程</a></p>
+</li>
+<li>
+<p><a href="https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html">git cherry-pick 教程</a></p>
+</li>
+<li>
+<p><a href="https://cloud.tencent.com/developer/doc/1096">Git 教程-开发者手册</a></p>
+</li>
+<li>
+<p><a href="https://gitexplorer.com/">一个一步一步显示 git 命令的网站</a></p>
+</li>
+</ul>
+
+    </div>
+
+    <footer class="post-footer">
+        <ul class="post-tags">
+            <li><a href="http://www.lmingyu.tech/tags/git/">Git</a></li>
+            <li><a href="http://www.lmingyu.tech/tags/%E5%91%BD%E4%BB%A4/">命令</a></li>
+            <li><a href="http://www.lmingyu.tech/tags/%E5%B8%B8%E7%94%A8%E7%B3%BB%E5%88%97/">常用系列</a></li>
+        </ul>
+<nav class="paginav">
+  <a class="next" href="http://www.lmingyu.tech/posts/tech/%E5%88%A9%E7%94%A8surge%E6%8A%8Amac%E5%8F%98%E6%88%90%E5%AE%B6%E4%B8%AD%E7%BD%91%E7%BB%9C%E6%9E%A2%E7%BA%BD/">
+    <span class="title">Next »</span>
+    <br>
+    <span>利用Surge把Mac变成家中网络枢纽</span>
+  </a>
+</nav>
+
+    </footer><script src="https://utteranc.es/client.js"
+        repo="lmingyul/lmingyul.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Mingyu</span>
+    <span>
+        <a href="http://beian.miit.gov.cn" target="_blank" style="color: #939393">粤ICP备2022085443号</a>
+    </span>
+    <span id="busuanzi_container_site_pv">
+        本站点击访问量：<span id="busuanzi_value_site_pv"></span>次，&nbsp;欢迎👏🏻！！！
+        </span>
+
+
+
+
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <img src="/img/rocket.webp" alt="top">
+
+
+
+
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) {
+            }
+            ;
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

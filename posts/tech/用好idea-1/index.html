@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>用好系列-IDEA之插件篇 | Mingyu&#39;s Blog</title>
+<meta name="keywords" content="用好系列, IDEA">
+<meta name="description" content="
+用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。
+">
+<meta name="author" content="
+作者:&nbsp;Mingyu">
+<link rel="canonical" href="http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.9398e812ee13177f99a2cdb1033d79099bcb88d9668bb415224ff445035b257f.css" integrity="sha256-k5joEu4TF3&#43;Zos2xAz15CZvLiNlmi7QVIk/0RQNbJX8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="icon" type="image/png" sizes="32x32" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="apple-touch-icon" href="http://www.lmingyu.tech/Q.gif">
+<link rel="mask-icon" href="http://www.lmingyu.tech/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="用好系列-IDEA之插件篇" />
+<meta property="og:description" content="
+用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/" />
+<meta property="og:image" content="https://blog.jetbrains.com/wp-content/uploads/2022/04/Release_Preview_image_1280x600_IntelliJIDEA-2x.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-07T14:21:39&#43;08:00" />
+<meta property="article:modified_time" content="2022-08-28T15:00:39&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog.jetbrains.com/wp-content/uploads/2022/04/Release_Preview_image_1280x600_IntelliJIDEA-2x.png" />
+<meta name="twitter:title" content="用好系列-IDEA之插件篇"/>
+<meta name="twitter:description" content="
+用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。
+"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "http://www.lmingyu.tech/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "💻技术",
+      "item": "http://www.lmingyu.tech/posts/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "用好系列-IDEA之插件篇",
+      "item": "http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "用好系列-IDEA之插件篇",
+  "name": "用好系列-IDEA之插件篇",
+  "description": " 用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。\n",
+  "keywords": [
+    "用好系列", "IDEA"
+  ],
+  "articleBody": " 用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。\n外观类 外观是第一生产力\nNyan Progress Bar 让你 IDEA 里面的进度条变得更可爱\n插件地址\nXcode-Dark Theme 换过很多的主题，还是这个主题用的最舒服\n插件地址\nRainbow Brackets 给你的括号加上不同颜色，加以区分\n插件地址 CodeGlance Pro 给你的代码增加缩略图，可以快速查找代码的位置\n插件地址\nExtra ToolWindow Colorful Icons 丰富你的工具窗口图标\n插件地址\nExtra Icons 丰富文件夹图标，这个是需要 IDEA 商业版才能使用\n插件地址\n工具类 Auto filling Java call arguments 在创建方法或构造方法会自动填充方法的所有参数\n使用方法：alt + Enter\n插件地址\nGenerateAllSetter 一键调用一个对象的所有的set方法，在给实体类设置值时很实用\n使用方法：alt + Enter\n插件地址\nGrep Console 通过expression表达式过滤日志、给不同级别的日志加上你想要的颜色。\n插件地址\nGsonFormatPlus 可以快速将 Json 转换为 Java 的类\n插件地址\nJRebel and XRebel 一款热部署 JVM 插件，通过跳过耗时的构建和重新部署步骤，简化了 Java 应用程序本地调试开发，这插件需要激活才能使用，可自行谷歌搜索一下\n插件地址\nMaven Helper 可以使用 Maven Helper 插件的 Dependency Analyzer 来分析工程的多级依赖关系，解决依赖冲突问题，在项目的 pom.xml文件下方打开 Dependency Analyzer 进行分析\n插件地址\nMyBatisX MybatisX 是一款基于 IDEA 的快速开发插件，包括以下比较好用的功能如：XML 跳转、自动生成代码（根据数据库表结构生成实体类和一些基本的mapper）、重置模板、JPA 提示等\n插件地址\n插件使用介绍\nString Manipulation 主要可以用于字符串处理：大小写切换、排序、转义、格式调整（对齐、删除空行）、加解密等。使用 Alt + M 快捷键快速操作，功能十分强大。\n插件地址\nTranslation 使用过笔记好用的翻译，是阅读源码的一个利器，个人使用的是阿里的翻译引擎，使用阿里开发账号即可激活\n插件地址\n锦上添花类 Alibaba Java Coding Guidelines(XenoAmess TPM) 是根据阿里的 Java 开发手册生成的一个代码规范插件，帮助我们写出更规范的代码\n插件地址\nSonarLint 同样是一个代码检插件，经常会提示一些更好的代码写法，推荐使用。\n插件地址\nSpotBugs 会帮助你找出代码中一些潜在的代码 BUG，但是它分析出来的也不能全信，还是要自己分析\n插件地址\nAlibaba Cloud AI Coding Assistant 阿里出的代码推荐插件，根据你敲出的几个字母给你推荐你可能需要的代码，最喜欢它的一个功能是代码文档搜索，它可以帮你找到已经开源的一些 API 接口的写法。\n像这种 AI 推荐代码的插件还有很多，AiXcoder Code Completer、Tabnine AI Code Completion- JS Java Python TS Rust Go PHP \u0026 More，选择自己喜欢就可以，但是不要沉迷代码工具，这些工具只能辅助，代码还是得自己写。\n插件地址\n取舍与优化 插件虽好，但不要贪多哦\n当你下载了很多插件使用的时候，难免会对 IDEA 软件运行和代码编译会造成影响，这时候就要进行适当的取舍和优化\n我们可以用 IDEA 本身有的功能分析每个插件对项目启动的影响，对于不使用的插件可以进行禁用。\nHelp -\u003e Diagnostic Tools -\u003e Analyze Plugin Startup Performance\n可以适当提供 IDEA 软件使用内存的上限，设置完之后重启即可生效。\nHelp -\u003e Diagnostic Tools -\u003e Analyze Plugin Startup Performance\n",
+  "wordCount" : "1235",
+  "inLanguage": "en",
+  "image":"https://blog.jetbrains.com/wp-content/uploads/2022/04/Release_Preview_image_1280x600_IntelliJIDEA-2x.png","datePublished": "2022-08-07T14:21:39+08:00",
+  "dateModified": "2022-08-28T15:00:39+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Mingyu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mingyu's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://www.lmingyu.tech/img/top.webp"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://www.lmingyu.tech" accesskey="h" title="Mingyu&#39;s Blog (Alt + H)">Mingyu&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://www.lmingyu.tech/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+    <header class="post-header">
+        <div class="breadcrumbs"><a href="http://www.lmingyu.tech">Home</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/">📚文章</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/tech/">💻技术</a></div>
+        <h1 class="post-title">
+            用好系列-IDEA之插件篇
+        </h1>
+        <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+创建:&nbsp;<span title='2022-08-07 14:21:39 +0800 +0800'>2022-08-07</span>&nbsp;|&nbsp;更新:&nbsp;2022-08-28&nbsp;|&nbsp;字数:&nbsp;1235&nbsp;字&nbsp;|&nbsp;阅读约耗时: 3&nbsp;分钟&nbsp;|&nbsp;
+作者:&nbsp;Mingyu
+
+|&nbsp;本文被浏览了&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;次
+        </div>
+    </header> 
+<figure class="entry-cover1"><img loading="lazy" src="https://blog.jetbrains.com/wp-content/uploads/2022/04/Release_Preview_image_1280x600_IntelliJIDEA-2x.png" alt="">
+        
+</figure><aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
+
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e5%a4%96%e8%a7%82%e7%b1%bb" aria-label="外观类">外观类</a><ul>
+                            
+                    <li>
+                        <a href="#nyan-progress-bar" aria-label="Nyan Progress Bar">Nyan Progress Bar</a></li>
+                    <li>
+                        <a href="#xcode-dark-theme" aria-label="Xcode-Dark Theme">Xcode-Dark Theme</a></li>
+                    <li>
+                        <a href="#rainbow-brackets" aria-label="Rainbow Brackets">Rainbow Brackets</a></li>
+                    <li>
+                        <a href="#codeglance-pro" aria-label="CodeGlance Pro">CodeGlance Pro</a></li>
+                    <li>
+                        <a href="#extra-toolwindow-colorful-icons" aria-label="Extra ToolWindow Colorful Icons">Extra ToolWindow Colorful Icons</a></li>
+                    <li>
+                        <a href="#extra-icons" aria-label="Extra Icons">Extra Icons</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e5%b7%a5%e5%85%b7%e7%b1%bb" aria-label="工具类">工具类</a><ul>
+                            
+                    <li>
+                        <a href="#auto-filling-java-call-arguments" aria-label="Auto filling Java call arguments">Auto filling Java call arguments</a></li>
+                    <li>
+                        <a href="#generateallsetter" aria-label="GenerateAllSetter">GenerateAllSetter</a></li>
+                    <li>
+                        <a href="#grep-console" aria-label="Grep Console">Grep Console</a></li>
+                    <li>
+                        <a href="#gsonformatplus" aria-label="GsonFormatPlus">GsonFormatPlus</a></li>
+                    <li>
+                        <a href="#jrebel-and-xrebel" aria-label="JRebel and XRebel">JRebel and XRebel</a></li>
+                    <li>
+                        <a href="#maven-helper" aria-label="Maven Helper">Maven Helper</a></li>
+                    <li>
+                        <a href="#mybatisx" aria-label="MyBatisX">MyBatisX</a></li>
+                    <li>
+                        <a href="#string-manipulation" aria-label="String Manipulation">String Manipulation</a></li>
+                    <li>
+                        <a href="#translation" aria-label="Translation">Translation</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e9%94%a6%e4%b8%8a%e6%b7%bb%e8%8a%b1%e7%b1%bb" aria-label="锦上添花类">锦上添花类</a><ul>
+                            
+                    <li>
+                        <a href="#alibaba-java-coding-guidelinesxenoamess-tpm" aria-label="Alibaba Java Coding Guidelines(XenoAmess TPM)">Alibaba Java Coding Guidelines(XenoAmess TPM)</a></li>
+                    <li>
+                        <a href="#sonarlint" aria-label="SonarLint">SonarLint</a></li>
+                    <li>
+                        <a href="#spotbugs" aria-label="SpotBugs">SpotBugs</a></li>
+                    <li>
+                        <a href="#alibaba-cloud-ai-coding-assistant" aria-label="Alibaba Cloud AI Coding Assistant">Alibaba Cloud AI Coding Assistant</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e5%8f%96%e8%88%8d%e4%b8%8e%e4%bc%98%e5%8c%96" aria-label="取舍与优化">取舍与优化</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
+    <div class="post-content"><blockquote>
+<p>用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。</p>
+</blockquote>
+<h1 id="外观类">外观类<a hidden class="anchor" aria-hidden="true" href="#外观类">#</a></h1>
+<p><strong>外观是第一生产力</strong></p>
+<h2 id="nyan-progress-bar">Nyan Progress Bar<a hidden class="anchor" aria-hidden="true" href="#nyan-progress-bar">#</a></h2>
+<blockquote>
+<p>让你 IDEA 里面的进度条变得更可爱</p>
+<p><a href="https://plugins.jetbrains.com/plugin/8575-nyan-progress-bar">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/VFR3p9-2022-08-28-142555.png" alt="VFR3p9-2022-08-28-142555"  />
+</p>
+<h2 id="xcode-dark-theme">Xcode-Dark Theme<a hidden class="anchor" aria-hidden="true" href="#xcode-dark-theme">#</a></h2>
+<blockquote>
+<p>换过很多的主题，还是这个主题用的最舒服</p>
+<p><a href="https://plugins.jetbrains.com/plugin/13106-xcode-dark-theme">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/3dpICg-2022-08-07-144806.png" alt="3dpICg-2022-08-07-144806"  />
+</p>
+<h2 id="rainbow-brackets">Rainbow Brackets<a hidden class="anchor" aria-hidden="true" href="#rainbow-brackets">#</a></h2>
+<blockquote>
+<p>给你的括号加上不同颜色，加以区分</p>
+<p><a href="https://plugins.jetbrains.com/plugin/10080-rainbow-brackets">插件地址 </a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/d8pPCt-2022-08-07-172554.png" alt="d8pPCt-2022-08-07-172554"  />
+</p>
+<h2 id="codeglance-pro">CodeGlance Pro<a hidden class="anchor" aria-hidden="true" href="#codeglance-pro">#</a></h2>
+<blockquote>
+<p>给你的代码增加缩略图，可以快速查找代码的位置</p>
+<p><a href="https://plugins.jetbrains.com/plugin/18824-codeglance-pro">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/gF7iuT-2022-08-07-172925.png" alt="gF7iuT-2022-08-07-172925"  />
+</p>
+<h2 id="extra-toolwindow-colorful-icons">Extra ToolWindow Colorful Icons<a hidden class="anchor" aria-hidden="true" href="#extra-toolwindow-colorful-icons">#</a></h2>
+<blockquote>
+<p>丰富你的工具窗口图标</p>
+<p><a href="https://plugins.jetbrains.com/plugin/16604-extra-toolwindow-colorful-icons">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/i5Qo3J-2022-08-07-145133.png" alt="i5Qo3J-2022-08-07-145133"  />
+</p>
+<h2 id="extra-icons">Extra Icons<a hidden class="anchor" aria-hidden="true" href="#extra-icons">#</a></h2>
+<blockquote>
+<p>丰富文件夹图标，这个是需要 IDEA 商业版才能使用</p>
+<p><a href="https://plugins.jetbrains.com/plugin/11058-extra-icons">插件地址</a></p>
+</blockquote>
+<img src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/VLU9su-2022-08-07-145348.png" alt="VLU9su-2022-08-07-145348" style="zoom:70%;" />
+<hr>
+<h1 id="工具类">工具类<a hidden class="anchor" aria-hidden="true" href="#工具类">#</a></h1>
+<h2 id="auto-filling-java-call-arguments">Auto filling Java call arguments<a hidden class="anchor" aria-hidden="true" href="#auto-filling-java-call-arguments">#</a></h2>
+<blockquote>
+<p>在创建方法或构造方法会自动填充方法的所有参数</p>
+<p>使用方法：alt + Enter</p>
+<p><a href="https://plugins.jetbrains.com/plugin/8638-auto-filling-java-call-arguments">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/MHZdvb-2022-08-28-142345.png" alt="MHZdvb-2022-08-28-142345"  />
+</p>
+<h2 id="generateallsetter">GenerateAllSetter<a hidden class="anchor" aria-hidden="true" href="#generateallsetter">#</a></h2>
+<blockquote>
+<p>一键调用一个对象的所有的set方法，在给实体类设置值时很实用</p>
+<p>使用方法：alt + Enter</p>
+<p><a href="https://plugins.jetbrains.com/plugin/9360-generateallsetter">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/IMzR2U-2022-08-28-142414.png" alt="IMzR2U-2022-08-28-142414"  />
+</p>
+<h2 id="grep-console">Grep Console<a hidden class="anchor" aria-hidden="true" href="#grep-console">#</a></h2>
+<blockquote>
+<p>通过expression表达式过滤日志、给不同级别的日志加上你想要的颜色。</p>
+<p><a href="https://plugins.jetbrains.com/plugin/7125-grep-console">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/k8eZEI-2022-08-07-173238.png" alt="k8eZEI-2022-08-07-173238"  />
+</p>
+<h2 id="gsonformatplus">GsonFormatPlus<a hidden class="anchor" aria-hidden="true" href="#gsonformatplus">#</a></h2>
+<blockquote>
+<p>可以快速将 Json 转换为 Java 的类</p>
+<p><a href="https://plugins.jetbrains.com/plugin/14949-gsonformatplus">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/2ppiIs-2022-08-07-173553.gif" alt="2ppiIs-2022-08-07-173553"  />
+</p>
+<h2 id="jrebel-and-xrebel">JRebel and XRebel<a hidden class="anchor" aria-hidden="true" href="#jrebel-and-xrebel">#</a></h2>
+<blockquote>
+<p>一款热部署 JVM 插件，通过跳过耗时的构建和重新部署步骤，简化了 Java 应用程序本地调试开发，这插件需要激活才能使用，可自行谷歌搜索一下</p>
+<p><a href="https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/E96e57-2022-08-07-175305.png" alt="E96e57-2022-08-07-175305"  />
+</p>
+<h2 id="maven-helper">Maven Helper<a hidden class="anchor" aria-hidden="true" href="#maven-helper">#</a></h2>
+<blockquote>
+<p>可以使用 Maven Helper 插件的 Dependency Analyzer 来分析工程的多级依赖关系，解决依赖冲突问题，在项目的 <code>pom.xml</code>文件下方打开 Dependency Analyzer 进行分析</p>
+<p><a href="https://plugins.jetbrains.com/plugin/7179-maven-helper">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/XxsebS-2022-08-07-175739.png" alt="XxsebS-2022-08-07-175739"  />
+</p>
+<h2 id="mybatisx">MyBatisX<a hidden class="anchor" aria-hidden="true" href="#mybatisx">#</a></h2>
+<blockquote>
+<p>MybatisX 是一款基于 IDEA 的快速开发插件，包括以下比较好用的功能如：<strong>XML 跳转</strong>、<strong>自动生成代码（根据数据库表结构生成实体类和一些基本的mapper）</strong>、<strong>重置模板</strong>、<strong>JPA 提示</strong>等</p>
+<p><a href="https://plugins.jetbrains.com/plugin/10119-mybatisx">插件地址</a></p>
+<p><a href="https://baomidou.com/pages/ba5b24/#%E5%8A%9F%E8%83%BD">插件使用介绍</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/gq7G59-2022-08-28-140753.jpg" alt="gq7G59-2022-08-28-140753"  />
+</p>
+<h2 id="string-manipulation">String Manipulation<a hidden class="anchor" aria-hidden="true" href="#string-manipulation">#</a></h2>
+<blockquote>
+<p>主要可以用于字符串处理：大小写切换、排序、转义、格式调整（对齐、删除空行）、加解密等。使用 Alt + M 快捷键快速操作，功能十分强大。</p>
+<p><a href="https://plugins.jetbrains.com/plugin/2162-string-manipulation">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/ewLSm6-2022-08-28-141440.jpg" alt="ewLSm6-2022-08-28-141440"  />
+</p>
+<h2 id="translation">Translation<a hidden class="anchor" aria-hidden="true" href="#translation">#</a></h2>
+<blockquote>
+<p>使用过笔记好用的翻译，是阅读源码的一个利器，个人使用的是阿里的翻译引擎，使用阿里开发账号即可激活</p>
+<p><a href="https://plugins.jetbrains.com/plugin/8579-translation">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/6DFFfL-2022-08-28-142526.png" alt="6DFFfL-2022-08-28-142526"  />
+</p>
+<h1 id="锦上添花类">锦上添花类<a hidden class="anchor" aria-hidden="true" href="#锦上添花类">#</a></h1>
+<h2 id="alibaba-java-coding-guidelinesxenoamess-tpm">Alibaba Java Coding Guidelines(XenoAmess TPM)<a hidden class="anchor" aria-hidden="true" href="#alibaba-java-coding-guidelinesxenoamess-tpm">#</a></h2>
+<blockquote>
+<p>是根据阿里的 Java 开发手册生成的一个代码规范插件，帮助我们写出更规范的代码</p>
+<p><a href="">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/NxAuXQ-2022-08-28-142959.png" alt="NxAuXQ-2022-08-28-142959"  />
+</p>
+<h2 id="sonarlint">SonarLint<a hidden class="anchor" aria-hidden="true" href="#sonarlint">#</a></h2>
+<blockquote>
+<p>同样是一个代码检插件，经常会提示一些更好的代码写法，推荐使用。</p>
+<p><a href="https://plugins.jetbrains.com/plugin/7973-sonarlint">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/lWr9a0-2022-08-28-143220.png" alt="lWr9a0-2022-08-28-143220"  />
+</p>
+<h2 id="spotbugs">SpotBugs<a hidden class="anchor" aria-hidden="true" href="#spotbugs">#</a></h2>
+<blockquote>
+<p>会帮助你找出代码中一些潜在的代码 BUG，但是它分析出来的也不能全信，还是要自己分析</p>
+<p><a href="https://plugins.jetbrains.com/plugin/14014-spotbugs">插件地址</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/UB522M-2022-08-28-143439.jpg" alt="UB522M-2022-08-28-143439"  />
+</p>
+<h2 id="alibaba-cloud-ai-coding-assistant">Alibaba Cloud AI Coding Assistant<a hidden class="anchor" aria-hidden="true" href="#alibaba-cloud-ai-coding-assistant">#</a></h2>
+<blockquote>
+<p>阿里出的代码推荐插件，根据你敲出的几个字母给你推荐你可能需要的代码，最喜欢它的一个功能是代码文档搜索，它可以帮你找到已经开源的一些 API 接口的写法。</p>
+<p>像这种 AI 推荐代码的插件还有很多，<a href="https://plugins.jetbrains.com/plugin/13574-aixcoder-code-completer">AiXcoder Code Completer</a>、<a href="https://plugins.jetbrains.com/plugin/12798-tabnine-ai-code-completion-js-java-python-ts-rust-go-php--more">Tabnine AI Code Completion- JS Java Python TS Rust Go PHP &amp; More</a>，选择自己喜欢就可以，但是不要沉迷代码工具，这些工具只能辅助，代码还是得自己写。</p>
+<p><a href="https://plugins.jetbrains.com/plugin/17809-alibaba-cloud-ai-coding-assistant">插件地址</a></p>
+</blockquote>
+<img src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/vpzwUU-2022-08-28-143914.png" alt="vpzwUU-2022-08-28-143914" style="zoom:33%;" />
+<h1 id="取舍与优化">取舍与优化<a hidden class="anchor" aria-hidden="true" href="#取舍与优化">#</a></h1>
+<blockquote>
+<p>插件虽好，但不要贪多哦</p>
+<p>当你下载了很多插件使用的时候，难免会对 IDEA 软件运行和代码编译会造成影响，这时候就要进行适当的取舍和优化</p>
+</blockquote>
+<p>我们可以用 IDEA 本身有的功能分析每个插件对项目启动的影响，对于不使用的插件可以进行禁用。</p>
+<p>Help -&gt; Diagnostic Tools -&gt; Analyze Plugin Startup Performance</p>
+<img src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/XozRvU-2022-08-28-145252.png" alt="XozRvU-2022-08-28-145252" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/EexDn8-2022-08-28-145430.png" alt="EexDn8-2022-08-28-145430" style="zoom:40%;" />
+<p><strong>可以适当提供 IDEA 软件使用内存的上限</strong>，设置完之后重启即可生效。</p>
+<p>Help -&gt; Diagnostic Tools -&gt; Analyze Plugin Startup Performance</p>
+<img src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/Hkmlvr-2022-08-28-145545.png" alt="Hkmlvr-2022-08-28-145545" style="zoom:50%;" />
+<p><img loading="lazy" src="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/bcgZbh-2022-08-28-145748.png" alt="bcgZbh-2022-08-28-145748"  />
+</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <ul class="post-tags">
+            <li><a href="http://www.lmingyu.tech/tags/%E7%94%A8%E5%A5%BD%E7%B3%BB%E5%88%97/">用好系列</a></li>
+            <li><a href="http://www.lmingyu.tech/tags/idea/">IDEA</a></li>
+        </ul>
+<nav class="paginav">
+  <a class="next" href="http://www.lmingyu.tech/posts/life/1/">
+    <span class="title">Next »</span>
+    <br>
+    <span>让自己舒服才能持续下去</span>
+  </a>
+</nav>
+
+    </footer><script src="https://utteranc.es/client.js"
+        repo="lmingyul/lmingyul.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Mingyu</span>
+    <span>
+        <a href="http://beian.miit.gov.cn" target="_blank" style="color: #939393">粤ICP备2022085443号</a>
+    </span>
+    <span id="busuanzi_container_site_pv">
+        本站点击访问量：<span id="busuanzi_value_site_pv"></span>次，&nbsp;欢迎👏🏻！！！
+        </span>
+
+
+
+
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <img src="/img/rocket.webp" alt="top">
+
+
+
+
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) {
+            }
+            ;
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

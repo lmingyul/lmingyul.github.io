@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Sat, 06 Aug 2022 00:43:04 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Aug 2022 14:21:39 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用好系列-IDEA之插件篇</title>
+      <link>http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/</link>
+      <pubDate>Sun, 07 Aug 2022 14:21:39 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;用好系列就是记录自己日常如何使用好软件工具，此文为用好系列-IDEA之插件篇，用于记录自己日常开发编程时IDEA常用的插件，此系列会持续更新。本文只记录插件本身，不记录插件使用方法，若记录使用方法，会导致内容长度过长，不方便阅览，使用方法可自行谷歌学习。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>常用系列-Git命令</title>
       <link>http://www.lmingyu.tech/posts/tech/git%E5%91%BD%E4%BB%A4/</link>

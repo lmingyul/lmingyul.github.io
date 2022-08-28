@@ -2,14 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://www.lmingyu.tech/posts/tech/</loc>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
+  </url><url>
     <loc>http://www.lmingyu.tech/posts/</loc>
-    <lastmod>2022-08-07T12:56:49+08:00</lastmod>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/tags/idea/</loc>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/</loc>
-    <lastmod>2022-08-07T12:56:49+08:00</lastmod>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/tags/</loc>
-    <lastmod>2022-08-07T12:56:49+08:00</lastmod>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/tags/%E7%94%A8%E5%A5%BD%E7%B3%BB%E5%88%97/</loc>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/</loc>
+    <lastmod>2022-08-28T15:00:39+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/tags/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2022-08-07T12:56:49+08:00</lastmod>
@@ -19,9 +31,6 @@
   </url><url>
     <loc>http://www.lmingyu.tech/posts/life/</loc>
     <lastmod>2022-08-07T12:56:49+08:00</lastmod>
-  </url><url>
-    <loc>http://www.lmingyu.tech/posts/tech/</loc>
-    <lastmod>2022-08-06T00:43:04+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/tags/git/</loc>
     <lastmod>2022-08-06T00:43:04+08:00</lastmod>

@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Sun, 07 Aug 2022 14:21:39 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Sep 2022 23:50:10 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java 学习笔记-重载与重写</title>
+      <link>http://www.lmingyu.tech/posts/tech/java%E5%9F%BA%E7%A1%80-1/</link>
+      <pubDate>Fri, 02 Sep 2022 23:50:10 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/java%E5%9F%BA%E7%A1%80-1/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;记录一下自己在学习 Java 的一些笔记。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>用好系列-IDEA之插件篇</title>
       <link>http://www.lmingyu.tech/posts/tech/%E7%94%A8%E5%A5%BDidea-1/</link>

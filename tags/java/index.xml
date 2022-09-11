@@ -7,9 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Fri, 02 Sep 2022 23:50:10 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Sep 2022 13:21:17 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Java 学习笔记-重载与重写</title>
+      <title>这 2 个对象一样吗</title>
+      <link>http://www.lmingyu.tech/posts/tech/java-learn-2/</link>
+      <pubDate>Sun, 11 Sep 2022 13:21:17 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/java-learn-2/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;在写业务代码的时候我们经常需要判断 2 个 Java 对象是否一样，常用判断对象是否相等可以使用 &lt;code&gt;==&lt;/code&gt; 、equals、hashcode 这 3 个方法，本文试图搞清楚这三者的用法。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>重载与重写</title>
       <link>http://www.lmingyu.tech/posts/tech/java%E5%9F%BA%E7%A1%80-1/</link>
       <pubDate>Fri, 02 Sep 2022 23:50:10 +0800</pubDate>
       

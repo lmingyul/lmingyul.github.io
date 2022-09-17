@@ -8,10 +8,10 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <meta name="referrer" content="no-referrer-when-downgrade">
-<title>MySQL 学习笔记-常用命令 | Mingyu&#39;s Blog</title>
+<title>MySQL 基础-命令行相关命令 | Mingyu&#39;s Blog</title>
 <meta name="keywords" content="MySQL, 学习笔记">
 <meta name="description" content="
-记录一下自己在学习 MySQL 的一些笔记。
+本文记录的是在使用命令行操作 MySQL 的一些常用命令。
 ">
 <meta name="author" content="
 作者:&nbsp;Mingyu">
@@ -44,21 +44,21 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="MySQL 学习笔记-常用命令" />
+</script><meta property="og:title" content="MySQL 基础-命令行相关命令" />
 <meta property="og:description" content="
-记录一下自己在学习 MySQL 的一些笔记。
+本文记录的是在使用命令行操作 MySQL 的一些常用命令。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://www.lmingyu.tech/posts/tech/mysql-learn-1/" />
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/mysql-2022-09-03-201122.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-03T20:06:36&#43;08:00" />
-<meta property="article:modified_time" content="2022-09-03T20:06:36&#43;08:00" />
+<meta property="article:modified_time" content="2022-09-17T20:06:36&#43;08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/mysql-2022-09-03-201122.png" />
-<meta name="twitter:title" content="MySQL 学习笔记-常用命令"/>
+<meta name="twitter:title" content="MySQL 基础-命令行相关命令"/>
 <meta name="twitter:description" content="
-记录一下自己在学习 MySQL 的一些笔记。
+本文记录的是在使用命令行操作 MySQL 的一些常用命令。
 "/>
 
 
@@ -82,7 +82,7 @@ if (!doNotTrack) {
     {
       "@type": "ListItem",
       "position":  4 ,
-      "name": "MySQL 学习笔记-常用命令",
+      "name": "MySQL 基础-命令行相关命令",
       "item": "http://www.lmingyu.tech/posts/tech/mysql-learn-1/"
     }
   ]
@@ -92,17 +92,17 @@ if (!doNotTrack) {
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "MySQL 学习笔记-常用命令",
-  "name": "MySQL 学习笔记-常用命令",
-  "description": " 记录一下自己在学习 MySQL 的一些笔记。\n",
+  "headline": "MySQL 基础-命令行相关命令",
+  "name": "MySQL 基础-命令行相关命令",
+  "description": " 本文记录的是在使用命令行操作 MySQL 的一些常用命令。\n",
   "keywords": [
     "MySQL", "学习笔记"
   ],
-  "articleBody": " 记录一下自己在学习 MySQL 的一些笔记。\n客户端与服务端相关命令 MySQL 分为客户端和服务端，客户端是发送真实访问的用户，就是需要操作数据库的人，服务端连接 MySQL 数据库，将客户端发送的操作命令发给数据库，然后将操作的结果再返回给用户。\n那为什么客户端不能直接连接数据库呢？\n那是因为一般客户端和 MySQL 数据库不会部署在同一台机器上，这时就不能直接访问数据库，而是必须带着用户名和密码，让服务端与数据库打交道（通常服务端一般会与数据库部署在同一台机器上，可以直接访问）\n启动命令 启动服务端 mysql.server start 指定端口启动 # 这里是大写 P，小写 p 代表密码 mysqld -P3307 启动客户端 mysql -h主机名 -u用户名 -p密码 停止命令 停止服务端 mysql.server stop 停止客户端 # 以下 3 个命令都可以 quit exit \\q 查看版本 mysql -V 存储引擎 查看当前服务器程序所有支持的存储引擎 show engines; 查看当前设置的存储引擎 show variables like 'default_storage_engine'; 创建表时指定表的存储引擎 create table 表名 ( 建表语句; ) engine = 存储引擎名称; 修改表的存储引擎 alter table 表名 engine = 存储引擎名称; 修改 MySQL 默认的存储引擎 # 仅对本次启动生效 mysqld --default-storage-engine=MyISAM; ",
-  "wordCount" : "419",
+  "articleBody": " 本文记录的是在使用命令行操作 MySQL 的一些常用命令。\n客户端与服务端相关命令 MySQL 分为客户端和服务端，客户端是发送真实访问的用户，就是需要操作数据库的人，服务端连接 MySQL 数据库，将客户端发送的操作命令发给数据库，然后将操作的结果再返回给用户。\n那为什么客户端不能直接连接数据库呢？\n那是因为一般客户端和 MySQL 数据库不会部署在同一台机器上，这时就不能直接访问数据库，而是必须带着用户名和密码，让服务端与数据库打交道（通常服务端一般会与数据库部署在同一台机器上，可以直接访问）\n启动命令 启动服务端 mysql.server start 指定端口启动 # 这里是大写 P，小写 p 代表密码 mysqld -P3307 启动客户端 # -p 与密码之间不能有空格； # 如果连接的是本地主机的数据库，-h 选项可以省略 # 各个参数的摆放顺序没有硬性要求 mysql -h 主机名 -u 用户名 -p密码 # 如果没有设置密码，启动客户端需要省略 -p 选项 mysql -u 用户名 一般在 -p 选项后面是不会直接输入密码的，因为其他人可以通过查询历史命令就知道了密码，所以通常是直接回车，然后再输入密码\n指定数据库启动客户端 mysql 数据库名 -u 用户名 -p 停止命令 停止服务端 mysql.server stop 停止退出客户端 # 以下 3 个命令都可以 quit exit \\q 查看版本 mysql -V 查看状态 在 MySQL 启动时需要确认当前启动的 MySQL 启动的状态是否与自己设置的配置一致，可以使用 status 命令\nmysql\u003e status -------------- mysql Ver 8.0.28 for macos11 on arm64 (MySQL Community Server - GPL) Connection id:\t72 Current database: Current user:\troot@localhost SSL:\tNot in use Current pager:\tless Using outfile:\t'' Using delimiter:\t; Server version:\t8.0.28 MySQL Community Server - GPL Protocol version:\t10 Connection:\tLocalhost via UNIX socket Server characterset:\tutf8mb4 Db characterset:\tutf8mb4 Client characterset:\tutf8mb4 Conn. characterset:\tutf8mb4 UNIX socket:\t/tmp/mysql.sock Binary data as:\tHexadecimal Uptime:\t20 days 13 hours 33 min 26 sec Threads: 2 Questions: 598 Slow queries: 0 Opens: 282 Flush tables: 3 Open tables: 203 Queries per second avg: 0.000 -------------- mysql\u003e 存储引擎 查看当前服务器程序所有支持的存储引擎 show engines; 查看当前设置的存储引擎 show variables like 'default_storage_engine'; 创建表时指定表的存储引擎 create table 表名 ( 建表语句; ) engine = 存储引擎名称; 修改表的存储引擎 alter table 表名 engine = 存储引擎名称; 修改 MySQL 默认的存储引擎 # 仅对本次启动生效 mysqld --default-storage-engine=MyISAM; 参考资料 MySQL基础教程 MySQL 8.0参考手册 ",
+  "wordCount" : "751",
   "inLanguage": "en",
   "image":"https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/mysql-2022-09-03-201122.png","datePublished": "2022-09-03T20:06:36+08:00",
-  "dateModified": "2022-09-03T20:06:36+08:00",
+  "dateModified": "2022-09-17T20:06:36+08:00",
   "author":{
     "@type": "Person",
     "name": "Mingyu"
@@ -198,7 +198,7 @@ if (!doNotTrack) {
     <header class="post-header">
         <div class="breadcrumbs"><a href="http://www.lmingyu.tech">Home</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/">📚文章</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/tech/">💻技术</a></div>
         <h1 class="post-title">
-            MySQL 学习笔记-常用命令
+            MySQL 基础-命令行相关命令
         </h1>
         <div class="post-meta">
 
@@ -211,7 +211,7 @@ if (!doNotTrack) {
 
 
 
-创建:&nbsp;<span title='2022-09-03 20:06:36 +0800 +0800'>2022-09-03</span>&nbsp;|&nbsp;更新:&nbsp;2022-09-03&nbsp;|&nbsp;字数:&nbsp;419&nbsp;字&nbsp;|&nbsp;阅读约耗时: 1&nbsp;分钟&nbsp;|&nbsp;
+创建:&nbsp;<span title='2022-09-03 20:06:36 +0800 +0800'>2022-09-03</span>&nbsp;|&nbsp;更新:&nbsp;2022-09-17&nbsp;|&nbsp;字数:&nbsp;751&nbsp;字&nbsp;|&nbsp;阅读约耗时: 2&nbsp;分钟&nbsp;|&nbsp;
 作者:&nbsp;Mingyu
 
 |&nbsp;本文被浏览了&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;次
@@ -235,10 +235,14 @@ if (!doNotTrack) {
                     <li>
                         <a href="#%e5%81%9c%e6%ad%a2%e5%91%bd%e4%bb%a4" aria-label="停止命令">停止命令</a></li>
                     <li>
-                        <a href="#%e6%9f%a5%e7%9c%8b%e7%89%88%e6%9c%ac" aria-label="查看版本">查看版本</a></li></ul>
+                        <a href="#%e6%9f%a5%e7%9c%8b%e7%89%88%e6%9c%ac" aria-label="查看版本">查看版本</a></li>
+                    <li>
+                        <a href="#%e6%9f%a5%e7%9c%8b%e7%8a%b6%e6%80%81" aria-label="查看状态">查看状态</a></li></ul>
                     </li>
                     <li>
-                        <a href="#%e5%ad%98%e5%82%a8%e5%bc%95%e6%93%8e" aria-label="存储引擎">存储引擎</a>
+                        <a href="#%e5%ad%98%e5%82%a8%e5%bc%95%e6%93%8e" aria-label="存储引擎">存储引擎</a></li>
+                    <li>
+                        <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" aria-label="参考资料">参考资料</a>
                     </li>
                 </ul>
             </div>
@@ -305,7 +309,7 @@ if (!doNotTrack) {
     }
 </script>
     <div class="post-content"><blockquote>
-<p>记录一下自己在学习 MySQL 的一些笔记。</p>
+<p>本文记录的是在使用命令行操作 MySQL 的一些常用命令。</p>
 </blockquote>
 <h1 id="客户端与服务端相关命令">客户端与服务端相关命令<a hidden class="anchor" aria-hidden="true" href="#客户端与服务端相关命令">#</a></h1>
 <p>MySQL 分为客户端和服务端，客户端是发送真实访问的用户，就是需要操作数据库的人，服务端连接 MySQL 数据库，将客户端发送的操作命令发给数据库，然后将操作的结果再返回给用户。</p>
@@ -324,14 +328,25 @@ if (!doNotTrack) {
 </span></span></code></pre></div><ul>
 <li><strong>启动客户端</strong></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#000">mysql</span> <span style="color:#000">-</span><span style="color:#000">h主机名</span> <span style="color:#000">-</span><span style="color:#000">u用户名</span> <span style="color:#000">-</span><span style="color:#000">p密码</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#177500"># -p 与密码之间不能有空格；
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"># 如果连接的是本地主机的数据库，-h 选项可以省略
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"># 各个参数的摆放顺序没有硬性要求
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#000">mysql</span> <span style="color:#000">-</span><span style="color:#000">h</span> <span style="color:#000">主机名</span> <span style="color:#000">-</span><span style="color:#000">u</span> <span style="color:#000">用户名</span> <span style="color:#000">-</span><span style="color:#000">p密码</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500"># 如果没有设置密码，启动客户端需要省略 -p 选项
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#000">mysql</span> <span style="color:#000">-</span><span style="color:#000">u</span> <span style="color:#000">用户名</span>
+</span></span></code></pre></div><p>一般在 -p 选项后面是不会直接输入密码的，因为其他人可以通过查询历史命令就知道了密码，所以通常是直接回车，然后再输入密码</p>
+<ul>
+<li>指定数据库启动客户端</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#000">mysql</span> <span style="color:#000">数据库名</span> <span style="color:#000">-</span><span style="color:#000">u</span> <span style="color:#000">用户名</span> <span style="color:#000">-</span><span style="color:#000">p</span>
 </span></span></code></pre></div><h2 id="停止命令">停止命令<a hidden class="anchor" aria-hidden="true" href="#停止命令">#</a></h2>
 <ul>
 <li><strong>停止服务端</strong></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#000">mysql</span>.<span style="color:#000">server</span> <span style="color:#000">stop</span>
 </span></span></code></pre></div><ul>
-<li><strong>停止客户端</strong></li>
+<li><strong>停止退出客户端</strong></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#177500"># 以下 3 个命令都可以
 </span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#000">quit</span>
@@ -341,7 +356,36 @@ if (!doNotTrack) {
 </span></span><span style="display:flex;"><span><span style="color:#000">\</span><span style="color:#000">q</span>
 </span></span></code></pre></div><h2 id="查看版本">查看版本<a hidden class="anchor" aria-hidden="true" href="#查看版本">#</a></h2>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#000">mysql</span> <span style="color:#000">-</span><span style="color:#000">V</span>
-</span></span></code></pre></div><hr>
+</span></span></code></pre></div><h2 id="查看状态">查看状态<a hidden class="anchor" aria-hidden="true" href="#查看状态">#</a></h2>
+<p>在 MySQL 启动时需要确认当前启动的 MySQL 启动的状态是否与自己设置的配置一致，可以使用 <code>status</code> 命令</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">mysql</span><span style="color:#000">&gt;</span> <span style="color:#000">status</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">------------</span><span style="color:#177500">--
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">mysql  Ver 8.0.28 for macos11 on arm64 (MySQL Community Server - GPL)
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Connection</span> <span style="color:#000">id</span>:		<span style="color:#1c01ce">72</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Current</span> <span style="color:#a90d91">database</span>:
+</span></span><span style="display:flex;"><span><span style="color:#000">Current</span> <span style="color:#a90d91">user</span>:		<span style="color:#000">root</span><span style="color:#000">@</span><span style="color:#000">localhost</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">SSL</span>:			<span style="color:#a90d91">Not</span> <span style="color:#a90d91">in</span> <span style="color:#a90d91">use</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Current</span> <span style="color:#000">pager</span>:		<span style="color:#000">less</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">Using</span> <span style="color:#a90d91">outfile</span>:		<span style="color:#c41a16">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">Using</span> <span style="color:#000">delimiter</span>:	;
+</span></span><span style="display:flex;"><span><span style="color:#000">Server</span> <span style="color:#000">version</span>:		<span style="color:#1c01ce">8</span>.<span style="color:#1c01ce">0</span>.<span style="color:#1c01ce">28</span> <span style="color:#000">MySQL</span> <span style="color:#000">Community</span> <span style="color:#000">Server</span> <span style="color:#000">-</span> <span style="color:#000">GPL</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Protocol</span> <span style="color:#000">version</span>:	<span style="color:#1c01ce">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Connection</span>:		<span style="color:#000">Localhost</span> <span style="color:#000">via</span> <span style="color:#000">UNIX</span> <span style="color:#000">socket</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Server</span> <span style="color:#000">characterset</span>:	<span style="color:#000">utf8mb4</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Db</span>     <span style="color:#000">characterset</span>:	<span style="color:#000">utf8mb4</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Client</span> <span style="color:#000">characterset</span>:	<span style="color:#000">utf8mb4</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Conn</span>.  <span style="color:#000">characterset</span>:	<span style="color:#000">utf8mb4</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">UNIX</span> <span style="color:#000">socket</span>:		<span style="color:#000">/</span><span style="color:#000">tmp</span><span style="color:#000">/</span><span style="color:#000">mysql</span>.<span style="color:#000">sock</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">Binary</span> <span style="color:#000">data</span> <span style="color:#a90d91">as</span>:		<span style="color:#000">Hexadecimal</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Uptime</span>:			<span style="color:#1c01ce">20</span> <span style="color:#000">days</span> <span style="color:#1c01ce">13</span> <span style="color:#000">hours</span> <span style="color:#1c01ce">33</span> <span style="color:#000">min</span> <span style="color:#1c01ce">26</span> <span style="color:#000">sec</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Threads</span>: <span style="color:#1c01ce">2</span>  <span style="color:#000">Questions</span>: <span style="color:#1c01ce">598</span>  <span style="color:#000">Slow</span> <span style="color:#000">queries</span>: <span style="color:#1c01ce">0</span>  <span style="color:#000">Opens</span>: <span style="color:#1c01ce">282</span>  <span style="color:#a90d91">Flush</span> <span style="color:#a90d91">tables</span>: <span style="color:#1c01ce">3</span>  <span style="color:#000">Open</span> <span style="color:#a90d91">tables</span>: <span style="color:#1c01ce">203</span>  <span style="color:#000">Queries</span> <span style="color:#000">per</span> <span style="color:#000">second</span> <span style="color:#000">avg</span>: <span style="color:#1c01ce">0</span>.<span style="color:#1c01ce">000</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">------------</span><span style="color:#177500">--
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">mysql&gt;
+</span></span></span></code></pre></div><hr>
 <h1 id="存储引擎">存储引擎<a hidden class="anchor" aria-hidden="true" href="#存储引擎">#</a></h1>
 <ul>
 <li>查看当前服务器程序所有支持的存储引擎</li>
@@ -366,7 +410,11 @@ if (!doNotTrack) {
 </ul>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#177500"># 仅对本次启动生效
 </span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#000">mysqld</span> <span style="color:#000">--</span><span style="color:#a90d91">default</span><span style="color:#000">-</span><span style="color:#000">storage</span><span style="color:#000">-</span><span style="color:#a90d91">engine</span><span style="color:#000">=</span><span style="color:#000">MyISAM</span>;
-</span></span></code></pre></div>
+</span></span></code></pre></div><h1 id="参考资料">参考资料<a hidden class="anchor" aria-hidden="true" href="#参考资料">#</a></h1>
+<ul>
+<li><a href="https://book.douban.com/subject/34953410/">MySQL基础教程</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/">MySQL 8.0参考手册</a></li>
+</ul>
 
     </div>
 

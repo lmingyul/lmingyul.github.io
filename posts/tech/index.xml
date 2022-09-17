@@ -7,7 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Sun, 11 Sep 2022 13:21:17 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Sep 2022 21:13:43 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/posts/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL 基础-DDL 命令</title>
+      <link>http://www.lmingyu.tech/posts/tech/mysql-learn-2/</link>
+      <pubDate>Sat, 17 Sep 2022 21:13:43 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/mysql-learn-2/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文记录的是 MySQL DDL 常用的一些命令。DDL (Data Definition Language 数据定义语言）用于操作对象及对象本身，这种对象包括数据库，表对象，及视图对象&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mysql MySQL 基础-DML、DQL 命令</title>
+      <link>http://www.lmingyu.tech/posts/tech/mysql-learn-3/</link>
+      <pubDate>Mon, 12 Sep 2022 15:50:46 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/mysql-learn-3/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文记录的是 MySQL DML、DQL 常用的一些命令。&lt;/p&gt;
+&lt;p&gt;DML（Data Manipulation Language 数据操控语言) 用于操作数据库表对象中包含的数据&lt;/p&gt;
+&lt;p&gt;DQL (Data Query Language 数据查询语言 )用于查询数据&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>这 2 个对象一样吗</title>
       <link>http://www.lmingyu.tech/posts/tech/java-learn-2/</link>
@@ -20,13 +44,13 @@
     </item>
     
     <item>
-      <title>MySQL 学习笔记-常用命令</title>
+      <title>MySQL 基础-命令行相关命令</title>
       <link>http://www.lmingyu.tech/posts/tech/mysql-learn-1/</link>
       <pubDate>Sat, 03 Sep 2022 20:06:36 +0800</pubDate>
       
       <guid>http://www.lmingyu.tech/posts/tech/mysql-learn-1/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;记录一下自己在学习 MySQL 的一些笔记。&lt;/p&gt;
+&lt;p&gt;本文记录的是在使用命令行操作 MySQL 的一些常用命令。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     

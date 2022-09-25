@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Sat, 17 Sep 2022 21:13:43 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Sep 2022 21:44:48 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 入门</title>
+      <link>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 25 Sep 2022 21:44:48 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;揭开 redis 的神秘面纱&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>MySQL 基础-DDL 命令</title>
       <link>http://www.lmingyu.tech/posts/tech/mysql-learn-2/</link>

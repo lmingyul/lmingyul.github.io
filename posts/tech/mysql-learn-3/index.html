@@ -8,7 +8,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <meta name="referrer" content="no-referrer-when-downgrade">
-<title>Mysql MySQL 基础-DML、DQL 命令 | Mingyu&#39;s Blog</title>
+<title>MySQL 基础-DML、DQL 命令 | Mingyu&#39;s Blog</title>
 <meta name="keywords" content="MySQL, 学习笔记">
 <meta name="description" content="
 本文记录的是 MySQL DML、DQL 常用的一些命令。
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="Mysql MySQL 基础-DML、DQL 命令" />
+</script><meta property="og:title" content="MySQL 基础-DML、DQL 命令" />
 <meta property="og:description" content="
 本文记录的是 MySQL DML、DQL 常用的一些命令。
 DML（Data Manipulation Language 数据操控语言) 用于操作数据库表对象中包含的数据
@@ -60,7 +60,7 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/mysql-2022-09-03-201122.png" />
-<meta name="twitter:title" content="Mysql MySQL 基础-DML、DQL 命令"/>
+<meta name="twitter:title" content="MySQL 基础-DML、DQL 命令"/>
 <meta name="twitter:description" content="
 本文记录的是 MySQL DML、DQL 常用的一些命令。
 DML（Data Manipulation Language 数据操控语言) 用于操作数据库表对象中包含的数据
@@ -88,7 +88,7 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
     {
       "@type": "ListItem",
       "position":  4 ,
-      "name": "Mysql MySQL 基础-DML、DQL 命令",
+      "name": "MySQL 基础-DML、DQL 命令",
       "item": "http://www.lmingyu.tech/posts/tech/mysql-learn-3/"
     }
   ]
@@ -98,14 +98,14 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Mysql MySQL 基础-DML、DQL 命令",
-  "name": "Mysql MySQL 基础-DML、DQL 命令",
+  "headline": "MySQL 基础-DML、DQL 命令",
+  "name": "MySQL 基础-DML、DQL 命令",
   "description": " 本文记录的是 MySQL DML、DQL 常用的一些命令。\nDML（Data Manipulation Language 数据操控语言) 用于操作数据库表对象中包含的数据\nDQL (Data Query Language 数据查询语言 )用于查询数据\n",
   "keywords": [
     "MySQL", "学习笔记"
   ],
-  "articleBody": " 本文记录的是 MySQL DML、DQL 常用的一些命令。\nDML（Data Manipulation Language 数据操控语言) 用于操作数据库表对象中包含的数据\nDQL (Data Query Language 数据查询语言 )用于查询数据\nDML 插入数据 插入一条数据 # 在 values 后面的（）中，插入的数据需要按照列的顺序用逗号进行分割数据 insert into 表名 values(数据 1, 数据 2 ...)； 示例：\nmysql\u003e insert into tb1 values('01', 'mingyu', 18); Query OK, 1 row affected (0.01 sec) 注意点：\n字符串数据需要用 \"\"双引号 或 ''单引号括起来 日期与时间数据也需要使用\"\"双引号 或 ''单引号括起来，日期必须以 YYYY-MM-DD 的格式输入，时间必须以 HH:MM:SS 的格式输入 指定列名插入数据 如果不填列名就是默认给所有列插入数据\n可以忽略列的顺序进行插入记录\ninsert into 表名 (列名 1, 列名 2 ...) values(数据 1, 数据 2 ...)； 插入多条数据 insert into 表名 (列名 1, 列名 2 ...) values(数据 1, 数据 2 ...),(数据 1, 数据 2 ...)； 将某个查询的结果插入表中 insert into 表1 (列名 1, 列名 2) select 列 1， 列 2 from 表 2； 从表 2 插入的列需要与被插入表 1 的列一一对应\n插入的其他操作 插入的数据如果在表中存在就不进行任何操作，如果不存在则插入\ninsert ignore into 表名 values(数据 1, 数据 2 ...)； 插入的数据如果在表中存在就对某些列进行更新，如果不存在则插入\ninsert into 表名 values(数据 1, 数据 2 ...) on duplicate key update 列名1 = '', 列名2 = ''； 删除数据 # 不加 where 表达式代表删除表中所有数据 delete from 表名 [where 表达式]; 更新数据 update 表名 set 列1 = 值1, 列2 = 值2 [where 表达式]; DQL 简单查询 查询多个列 查询表的数据，select 语句是使用频率最高的命令，查询所有列的也是最常用的：select * from 表名;\nselect 列名 1, 列名 2... from 表名; 示例：\nmysql\u003e select empid, name from tb1; +-------+--------+ | empid | name | +-------+--------+ | 01 | mingyu | +-------+--------+ 1 row in set (0.00 sec) 列的别名 可以给结果集中的列重新定义一个别名\nselect 列名 [as] 列的别名 from 表名; 这个as 可有可无，如果没有 as ，列和列的别名之间使用空格进行分割，如：\nSELECT number as 学号 FROM student_info; SELECT number 学号 FROM student_info; 查询结果去重 去除单列 select distinct 列名 from 表名; 去除多列 多列重复即查询的每一条结果中每一列都相同\nselect distinct 列名1, 列名2 ... from 表名; 限制结果数量 select 列名 from 表名 limit 偏移量 限制条数; 这个语句的意思是：从偏移量的地方开始，查询出限制条数的结果 limit 后面如果只有一个数，说明偏移量为 0，即默认从第 1 条数据开始查询 如果偏移量大于或等于所有数据的行数，查询出来的结果就是空集 对查询结果排序 对查询结果按照某一个列进行排序\nselect 列名 from 表名 order by 列名 [ASC|DESC]; ASC 代表查询结果按照由小到大排序，即升序 DESC 代表查询结果按照由大到小排序，即降序 两种排序方式只能选其中一个 如果两种都不填，默认使用 ASC 进行升序排序 不仅可以按照数字类型的列进行排序，也可以通过字符类型的列进行排序，排序的规则是按照每个字符的大小进行比较得出的 当 order by 子句和 limit 子句一起使用的时候，order by 子句必须放置在 limit 子句前面 简单查询中各子句的顺序 select [distinct] 查询列 [from 表名] [where 过滤条件] [group by 需要分组的列] [having 分组过滤条件] [order by 排序的列名] [limit 偏移量, 限制条数] 中括号 [] 中的内容可以省略 各子句严格遵守这个顺序 带搜索条件的查询 当我们需要对查询结果进行过滤的时候，可以将搜索条件放在 where 子句中\nSELECT * FROM student_info where number = 20220918; 如果我们需要指定某一列的值是否在某个列表中，可以使用 where in 子句\nSELECT * FROM student_info where number in (1, 2, 3); 带汇总函数的查询 count 函数 count 函数的含义是从查询的结果中统计出对应列中非 NULL 值的数量\n# 统计出结果中列 A 不为 null 的数量 select count(列 A) from 表名; # 统计结果中数据的数量，不管是否为 null select count(*) from 表名; select count(1) from 表名; # 统计结果中所有值不为 null 且数据不重复的数量 select count(distinct 列名) from 表名; 分组查询 当我们需要查询的结果进行分组，就可以使用 group by , group by 后跟的是需要分组的列\nselect ... from 表名 group by 列名 带 where 子句的分组查询，先进行筛选再进行分组\nselect ... from 表名 where 条件 group by 列名 有时候 group by 后会产生很多分组，如果想针对分组做过滤，就可以放到 having 子句中\n针对分组的过滤条件主要有：\n与分组列有关的条件，如：以科目分组， 那针对分组的过滤条件可以是 having subject = 'MySQL 课程' 这种条件也可以使用 where 子句进行过滤 与作用于分组的汇总函数有关的条件，如 having count(1) \u003e 10 ，这个过滤条件就是过滤过分组后数据多于 10 条的分组 汇总函数有关的条件是不能出现在 where 子句，因为 where 过滤的条件是针对每一条记录，而汇总函数是针对某一分组中所有记录的情况，不适用于判断单条记录是否符合条件 select ... from 表名 group by 列名 having 条件 分组查询注意事项\n如果分组列中含有 NULL， 那么 NULL 也会作为一个独立的分组存在 group by 子句后可以跟表达式（但不能是汇总函数） 子查询 当我们想查询的结果涉及到多张表或查询必须由多条查询语句组成的时候就难免会使用到子查询\n什么是子查询？\n子查询一般由多个查询语句组成，小括号括起来的一条查询语句一般是一个子查询，在执行查询语句的时候，会按照小括号从内到外的顺序依次执行。所有子查询都必须使用小括号括起来。\n例子\nmysql\u003e select * from student_score where number = (select number from student_info where name = '狗爷'); +----------+-----------+-------+ | number | subject | score | +----------+-----------+-------+ | 20220918 | 计算机 | 88 | +----------+-----------+-------+ 1 row in set (0.00 sec) 连接查询 把一个表的记录与另一个表的记录组合在一起形成新的更多的记录，这个过程称为连接查询\n# 两个表连接起来生成的结果集称为笛卡尔积，如果表 1 有 3 条记录，表 2 有 2 条记录，那组成后就含有 2 x 3 = 6 条记录，笛卡尔积就为 6 selecr * from 表1, 表2; 驱动表：根据 A 表中的数据去另一张表 B 中查数据，那么 A 表被称为驱动表，B 表称为被驱动表\n内连接 对于内连接的两个表，如果驱动表中记录在被驱动表中找不到匹配的记录，那这一条驱动表的记录不会加入到最后的结果集中\nselect * from t1 inner join t2 [on 过滤条件] 外连接 对于外连接的两个表，如果驱动表中记录在被驱动表中找不到匹配的记录，那这一条驱动表的记录仍会加入到最后的结果集中，对于不存的被驱动表的部分会使用 NULL 进行填充\n简单说就是驱动表的数据是全的，被驱动表不一定\n根据驱动表的不同，外连接可细分为左（外）连接、右（外）连接\n左（外）连接 # join 左侧的表称为外表或驱动表，右侧的表称为内表或被驱动表 select * from t1 left join t2 on 过滤条件 右（外）连接 # join 右侧的表为驱动表，左侧的表为被驱动表 select * from t1 right join t2 on 过滤条件 不管是左连接还是右连接，on 子句中的过滤条件是不能省略的 其余常用的sql语句 视图 当有些查询语句很复杂或很长的时候，此时如果想要复用这个语句就可以使用视图\n创建视图 create view 视图名 as 想要复用的查询语句; 视图的查询，更新，删除等语句都与正常真实的表的用法一致，视图其实就是相当于某个查询语句的别名\n在对视图进行查询的时候，MySQL服务器会将查询语句转换为真实的查询语句后才执行，使用视图的好处是简化书写\n如：select * from 视图名\n查看视图 # 视图是虚拟表，新创建的视图名不能与其他视图名或表名重复 show tables; # 查看视图的定义 show create view 视图名\\G 删除视图 drop view 视图名; 在执行 sql 语句的时候，有时候会出现 warning 警告，可以使用以下命令查询这个警告是什么\nshow warnings; ",
-  "wordCount" : "2755",
+  "articleBody": " 本文记录的是 MySQL DML、DQL 常用的一些命令。\nDML（Data Manipulation Language 数据操控语言) 用于操作数据库表对象中包含的数据\nDQL (Data Query Language 数据查询语言 )用于查询数据\nDML 插入数据 插入一条数据 # 在 values 后面的（）中，插入的数据需要按照列的顺序用逗号进行分割数据 insert into 表名 values(数据 1, 数据 2 ...)； 示例：\nmysql\u003e insert into tb1 values('01', 'mingyu', 18); Query OK, 1 row affected (0.01 sec) 注意点：\n字符串数据需要用 \"\"双引号 或 ''单引号括起来 日期与时间数据也需要使用\"\"双引号 或 ''单引号括起来，日期必须以 YYYY-MM-DD 的格式输入，时间必须以 HH:MM:SS 的格式输入 指定列名插入数据 如果不填列名就是默认给所有列插入数据\n可以忽略列的顺序进行插入记录\ninsert into 表名 (列名 1, 列名 2 ...) values(数据 1, 数据 2 ...)； 插入多条数据 insert into 表名 (列名 1, 列名 2 ...) values(数据 1, 数据 2 ...),(数据 1, 数据 2 ...)； 将某个查询的结果插入表中 insert into 表1 (列名 1, 列名 2) select 列 1， 列 2 from 表 2； 从表 2 插入的列需要与被插入表 1 的列一一对应\n插入的其他操作 插入的数据如果在表中存在就不进行任何操作，如果不存在则插入\ninsert ignore into 表名 values(数据 1, 数据 2 ...)； 插入的数据如果在表中存在就对某些列进行更新，如果不存在则插入\ninsert into 表名 values(数据 1, 数据 2 ...) on duplicate key update 列名1 = '', 列名2 = ''； 删除数据 # 不加 where 表达式代表删除表中所有数据 delete from 表名 [where 表达式]; 更新数据 update 表名 set 列1 = 值1, 列2 = 值2 [where 表达式]; DQL 简单查询 查询多个列 查询表的数据，select 语句是使用频率最高的命令，查询所有列的也是最常用的：select * from 表名;\nselect 列名 1, 列名 2... from 表名; 示例：\nmysql\u003e select empid, name from tb1; +-------+--------+ | empid | name | +-------+--------+ | 01 | mingyu | +-------+--------+ 1 row in set (0.00 sec) 列的别名 可以给结果集中的列重新定义一个别名\nselect 列名 [as] 列的别名 from 表名; 这个as 可有可无，如果没有 as ，列和列的别名之间使用空格进行分割，如：\nSELECT number as 学号 FROM student_info; SELECT number 学号 FROM student_info; 查询结果去重 去除单列 select distinct 列名 from 表名; 去除多列 多列重复即查询的每一条结果中每一列都相同\nselect distinct 列名1, 列名2 ... from 表名; 限制结果数量 select 列名 from 表名 limit 偏移量 限制条数; 这个语句的意思是：从偏移量的地方开始，查询出限制条数的结果 limit 后面如果只有一个数，说明偏移量为 0，即默认从第 1 条数据开始查询 如果偏移量大于或等于所有数据的行数，查询出来的结果就是空集 对查询结果排序 对查询结果按照某一个列进行排序\nselect 列名 from 表名 order by 列名 [ASC|DESC]; ASC 代表查询结果按照由小到大排序，即升序 DESC 代表查询结果按照由大到小排序，即降序 两种排序方式只能选其中一个 如果两种都不填，默认使用 ASC 进行升序排序 不仅可以按照数字类型的列进行排序，也可以通过字符类型的列进行排序，排序的规则是按照每个字符的大小进行比较得出的 当 order by 子句和 limit 子句一起使用的时候，order by 子句必须放置在 limit 子句前面 简单查询中各子句的顺序 select [distinct] 查询列 [from 表名] [where 过滤条件] [group by 需要分组的列] [having 分组过滤条件] [order by 排序的列名] [limit 偏移量, 限制条数] 中括号 [] 中的内容可以省略 各子句严格遵守这个顺序 带搜索条件的查询 当我们需要对查询结果进行过滤的时候，可以将搜索条件放在 where 子句中\nSELECT * FROM student_info where number = 20220918; 如果我们需要指定某一列的值是否在某个列表中，可以使用 where in 子句\nSELECT * FROM student_info where number in (1, 2, 3); 带汇总函数的查询 count 函数 count 函数的含义是从查询的结果中统计出对应列中非 NULL 值的数量\n# 统计出结果中列 A 不为 null 的数量 select count(列 A) from 表名; # 统计结果中数据的数量，不管是否为 null select count(*) from 表名; select count(1) from 表名; # 统计结果中所有值不为 null 且数据不重复的数量 select count(distinct 列名) from 表名; 分组查询 当我们需要查询的结果进行分组，就可以使用 group by , group by 后跟的是需要分组的列\nselect ... from 表名 group by 列名 带 where 子句的分组查询，先进行筛选再进行分组\nselect ... from 表名 where 条件 group by 列名 有时候 group by 后会产生很多分组，如果想针对分组做过滤，就可以放到 having 子句中\n针对分组的过滤条件主要有：\n与分组列有关的条件，如：以科目分组， 那针对分组的过滤条件可以是 having subject = 'MySQL 课程' 这种条件也可以使用 where 子句进行过滤 与作用于分组的汇总函数有关的条件，如 having count(1) \u003e 10 ，这个过滤条件就是过滤过分组后数据多于 10 条的分组 汇总函数有关的条件是不能出现在 where 子句，因为 where 过滤的条件是针对每一条记录，而汇总函数是针对某一分组中所有记录的情况，不适用于判断单条记录是否符合条件 select ... from 表名 group by 列名 having 条件 分组查询注意事项\n如果分组列中含有 NULL， 那么 NULL 也会作为一个独立的分组存在 group by 子句后可以跟表达式（但不能是汇总函数） 子查询 当我们想查询的结果涉及到多张表或查询必须由多条查询语句组成的时候就难免会使用到子查询\n什么是子查询？\n子查询一般由多个查询语句组成，小括号括起来的一条查询语句一般是一个子查询，在执行查询语句的时候，会按照小括号从内到外的顺序依次执行。所有子查询都必须使用小括号括起来。\n例子\nmysql\u003e select * from student_score where number = (select number from student_info where name = '狗爷'); +----------+-----------+-------+ | number | subject | score | +----------+-----------+-------+ | 20220918 | 计算机 | 88 | +----------+-----------+-------+ 1 row in set (0.00 sec) 连接查询 把一个表的记录与另一个表的记录组合在一起形成新的更多的记录，这个过程称为连接查询\n# 两个表连接起来生成的结果集称为笛卡尔积，如果表 1 有 3 条记录，表 2 有 2 条记录，那组成后就含有 2 x 3 = 6 条记录，笛卡尔积就为 6 selecr * from 表1, 表2; 驱动表：根据 A 表中的数据去另一张表 B 中查数据，那么 A 表被称为驱动表，B 表称为被驱动表\n内连接 对于内连接的两个表，如果驱动表中记录在被驱动表中找不到匹配的记录，那这一条驱动表的记录不会加入到最后的结果集中\nselect * from t1 inner join t2 [on 过滤条件] 外连接 对于外连接的两个表，如果驱动表中记录在被驱动表中找不到匹配的记录，那这一条驱动表的记录仍会加入到最后的结果集中，对于不存的被驱动表的部分会使用 NULL 进行填充\n简单说就是驱动表的数据是全的，被驱动表不一定\n根据驱动表的不同，外连接可细分为左（外）连接、右（外）连接\n左（外）连接 # join 左侧的表称为外表或驱动表，右侧的表称为内表或被驱动表 select * from t1 left join t2 on 过滤条件 右（外）连接 # join 右侧的表为驱动表，左侧的表为被驱动表 select * from t1 right join t2 on 过滤条件 不管是左连接还是右连接，on 子句中的过滤条件是不能省略的 其余常用的sql语句 视图 当有些查询语句很复杂或很长的时候，此时如果想要复用这个语句就可以使用视图\n创建视图 create view 视图名 as 想要复用的查询语句; 视图的查询，更新，删除等语句都与正常真实的表的用法一致，视图其实就是相当于某个查询语句的别名\n在对视图进行查询的时候，MySQL服务器会将查询语句转换为真实的查询语句后才执行，使用视图的好处是简化书写\n如：select * from 视图名\n查看视图 # 视图是虚拟表，新创建的视图名不能与其他视图名或表名重复 show tables; # 查看视图的定义 show create view 视图名\\G 删除视图 drop view 视图名; 在执行 sql 语句的时候，有时候会出现 warning 警告，可以使用以下命令查询这个警告是什么\nshow warnings; 参考资料 MySQL基础教程 MySQL 8.0参考手册 MySQL是怎样使用的 快速入门MySQL ",
+  "wordCount" : "2796",
   "inLanguage": "en",
   "image":"https://cdn.jsdelivr.net/gh/lmingyul/lmingyul.github.io@uPic/uPic/mysql-2022-09-03-201122.png","datePublished": "2022-09-12T15:50:46+08:00",
   "dateModified": "2022-09-25T15:50:46+08:00",
@@ -204,7 +204,7 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
     <header class="post-header">
         <div class="breadcrumbs"><a href="http://www.lmingyu.tech">Home</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/">📚文章</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/tech/">💻 技术</a></div>
         <h1 class="post-title">
-            Mysql MySQL 基础-DML、DQL 命令
+            MySQL 基础-DML、DQL 命令
         </h1>
         <div class="post-meta">
 
@@ -217,7 +217,7 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
 
 
 
-创建:&nbsp;<span title='2022-09-12 15:50:46 +0800 +0800'>2022-09-12</span>&nbsp;|&nbsp;更新:&nbsp;2022-09-25&nbsp;|&nbsp;字数:&nbsp;2755&nbsp;字&nbsp;|&nbsp;阅读约耗时: 6&nbsp;分钟&nbsp;|&nbsp;
+创建:&nbsp;<span title='2022-09-12 15:50:46 +0800 +0800'>2022-09-12</span>&nbsp;|&nbsp;更新:&nbsp;2022-09-25&nbsp;|&nbsp;字数:&nbsp;2796&nbsp;字&nbsp;|&nbsp;阅读约耗时: 6&nbsp;分钟&nbsp;|&nbsp;
 作者:&nbsp;Mingyu
 
 |&nbsp;本文被浏览了&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;次
@@ -318,12 +318,12 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
                     <li>
                         <a href="#%e6%9f%a5%e7%9c%8b%e8%a7%86%e5%9b%be" aria-label="查看视图">查看视图</a></li>
                     <li>
-                        <a href="#%e5%88%a0%e9%99%a4%e8%a7%86%e5%9b%be" aria-label="删除视图">删除视图</a>
+                        <a href="#%e5%88%a0%e9%99%a4%e8%a7%86%e5%9b%be" aria-label="删除视图">删除视图</a></li></ul>
+                    </li></ul>
                     </li>
-                </ul>
-                </li>
-                </ul>
-                </li>
+                    <li>
+                        <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" aria-label="参考资料">参考资料</a>
+                    </li>
                 </ul>
             </div>
         </details>
@@ -592,7 +592,13 @@ DQL (Data Query Language 数据查询语言 )用于查询数据
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#a90d91">drop</span> <span style="color:#000">view</span> <span style="color:#000">视图名</span>;
 </span></span></code></pre></div><p>在执行 sql 语句的时候，有时候会出现 warning 警告，可以使用以下命令查询这个警告是什么</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#a90d91">show</span> <span style="color:#000">warnings</span>;
-</span></span></code></pre></div>
+</span></span></code></pre></div><hr>
+<h1 id="参考资料">参考资料<a hidden class="anchor" aria-hidden="true" href="#参考资料">#</a></h1>
+<ul>
+<li><a href="https://book.douban.com/subject/34953410/">MySQL基础教程</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/">MySQL 8.0参考手册</a></li>
+<li><a href="https://book.douban.com/subject/35670862/">MySQL是怎样使用的 快速入门MySQL</a></li>
+</ul>
 
     </div>
 

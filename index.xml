@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Sat, 08 Oct 2022 23:39:51 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Oct 2022 21:28:14 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>依赖注入</title>
+      <link>http://www.lmingyu.tech/posts/tech/spring-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</link>
+      <pubDate>Sun, 16 Oct 2022 21:28:14 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/spring-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Spring 的学习笔记——依赖注入&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>《我是一只IT小小鸟》读书笔记</title>
       <link>http://www.lmingyu.tech/posts/input/%E6%88%91%E6%98%AF%E4%B8%80%E5%8F%AAit%E5%B0%8F%E5%B0%8F%E9%B8%9F%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
@@ -38,17 +49,6 @@
       <guid>http://www.lmingyu.tech/posts/input/%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;《小狗钱钱》阅读笔记&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>Redis 基本命令</title>
-      <link>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Tue, 27 Sep 2022 22:59:03 +0800</pubDate>
-      
-      <guid>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;记录一下 redis 命令行中常用的一些命令&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
@@ -192,6 +192,17 @@
       
       <guid>http://www.lmingyu.tech/about/</guid>
       <description>名字 Taiming Liang 坐标 广东 深圳 职业 后端程序员 描述 努力往独立开发者 💻 迈进 💪 尝试以英语为切入点重新认识世界 🌍 想以非功利的方式去阅读 📖 很高兴认识你! ─=≡Σ</description>
+    </item>
+    
+    <item>
+      <title>Redis 基本命令</title>
+      <link>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;记录一下 redis 命令行中常用的一些命令&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     

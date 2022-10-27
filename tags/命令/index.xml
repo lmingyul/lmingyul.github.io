@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>Mingyu</copyright>
-    <lastBuildDate>Sat, 06 Aug 2022 00:43:04 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/tags/%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Sep 2022 22:59:03 +0800</lastBuildDate><atom:link href="http://www.lmingyu.tech/tags/%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 基本命令</title>
+      <link>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Tue, 27 Sep 2022 22:59:03 +0800</pubDate>
+      
+      <guid>http://www.lmingyu.tech/posts/tech/redis-learn-redis%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;记录一下 redis 命令行中常用的一些命令&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>常用系列-Git命令</title>
       <link>http://www.lmingyu.tech/posts/tech/git%E5%91%BD%E4%BB%A4/</link>

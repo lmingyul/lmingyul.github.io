@@ -2,19 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://www.lmingyu.tech/posts/input/%E4%BD%A0%E6%98%AF%E4%BD%A0%E5%90%83%E5%87%BA%E6%9D%A5%E7%9A%84%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-10-29T00:25:25+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/posts/input/</loc>
+    <lastmod>2022-10-29T00:25:25+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/posts/</loc>
+    <lastmod>2022-10-29T00:25:25+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/</loc>
+    <lastmod>2022-10-29T00:25:25+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/tags/</loc>
+    <lastmod>2022-10-29T00:25:25+08:00</lastmod>
+  </url><url>
+    <loc>http://www.lmingyu.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-10-29T00:25:25+08:00</lastmod>
+  </url><url>
     <loc>http://www.lmingyu.tech/posts/tech/</loc>
     <lastmod>2022-10-16T21:28:14+08:00</lastmod>
   </url><url>
-    <loc>http://www.lmingyu.tech/posts/</loc>
-    <lastmod>2022-10-16T21:28:14+08:00</lastmod>
-  </url><url>
-    <loc>http://www.lmingyu.tech/</loc>
-    <lastmod>2022-10-16T21:28:14+08:00</lastmod>
-  </url><url>
     <loc>http://www.lmingyu.tech/tags/spring/</loc>
-    <lastmod>2022-10-16T21:28:14+08:00</lastmod>
-  </url><url>
-    <loc>http://www.lmingyu.tech/tags/</loc>
     <lastmod>2022-10-16T21:28:14+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/posts/tech/spring-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</loc>
@@ -24,12 +33,6 @@
     <lastmod>2022-10-16T21:28:14+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/posts/input/%E6%88%91%E6%98%AF%E4%B8%80%E5%8F%AAit%E5%B0%8F%E5%B0%8F%E9%B8%9F%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-10-08T23:39:51+08:00</lastmod>
-  </url><url>
-    <loc>http://www.lmingyu.tech/posts/input/</loc>
-    <lastmod>2022-10-08T23:39:51+08:00</lastmod>
-  </url><url>
-    <loc>http://www.lmingyu.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-10-08T23:39:51+08:00</lastmod>
   </url><url>
     <loc>http://www.lmingyu.tech/posts/summary/</loc>

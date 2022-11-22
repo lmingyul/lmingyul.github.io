@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>Spring-创建Bean的方式 | Mingyu&#39;s Blog</title>
+<meta name="keywords" content="Spring, 学习笔记">
+<meta name="description" content="
+Spring 的学习笔记——创建 Bean 的方式，本文代码存放在 github 仓库中
+">
+<meta name="author" content="
+作者:&nbsp;Mingyu">
+<link rel="canonical" href="http://www.lmingyu.tech/posts/tech/spring-%E5%88%9B%E5%BB%BAbean%E7%9A%84%E6%96%B9%E5%BC%8F/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.37b5edb6a132c0f8f362e02faf302b5a609ac52173812dfff4069e59b08cf5d7.css" integrity="sha256-N7XttqEywPjzYuAvrzArWmCaxSFzgS3/9AaeWbCM9dc=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="icon" type="image/png" sizes="32x32" href="http://www.lmingyu.tech/img/top.webp">
+<link rel="apple-touch-icon" href="http://www.lmingyu.tech/Q.gif">
+<link rel="mask-icon" href="http://www.lmingyu.tech/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Spring-创建Bean的方式" />
+<meta property="og:description" content="
+Spring 的学习笔记——创建 Bean 的方式，本文代码存放在 github 仓库中
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.lmingyu.tech/posts/tech/spring-%E5%88%9B%E5%BB%BAbean%E7%9A%84%E6%96%B9%E5%BC%8F/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-18T00:07:49&#43;08:00" />
+<meta property="article:modified_time" content="2022-11-18T00:07:49&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring-创建Bean的方式"/>
+<meta name="twitter:description" content="
+Spring 的学习笔记——创建 Bean 的方式，本文代码存放在 github 仓库中
+"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "http://www.lmingyu.tech/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "💻 技术",
+      "item": "http://www.lmingyu.tech/posts/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "Spring-创建Bean的方式",
+      "item": "http://www.lmingyu.tech/posts/tech/spring-%E5%88%9B%E5%BB%BAbean%E7%9A%84%E6%96%B9%E5%BC%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring-创建Bean的方式",
+  "name": "Spring-创建Bean的方式",
+  "description": " Spring 的学习笔记——创建 Bean 的方式，本文代码存放在 github 仓库中\n",
+  "keywords": [
+    "Spring", "学习笔记"
+  ],
+  "articleBody": " Spring 的学习笔记——创建 Bean 的方式，本文代码存放在 github 仓库中\n容器的创造 如果我们想搞清楚 Bean 是如何创建的，首先得找到创建 Bean 的人——也就是 Spring 容器（创建和管理 Bean 的地方)\n而在 Spring 容器中起到关键作用的就是这 2 个角色： BeanFactory、ApplicationContext，这 2 个都可以代表 Spring 容器\nBeanFactory 定义 BeanFactory 是创建、管理各种类对象的通用工厂\nBeanFactory 接口在 Spring 中有多种实现，最常用的是 XmlBeanDefinitionReader、DefaultListableBeanfactory，通过 BeanFactory 的 getBean() 方法可以把 Bean 创建出来\n示例 Car: 要被创建的 Bean\n/** * 车 * @author liangtaiming * @date 2022/10/30 **/ public class Car { /** * 品牌 */ private String brand; /** * 颜色 */ private String color; /** * 空参构造 */ public Car() { } /** * 有参构造 */ public Car(String brand, String color) { this.brand = brand; this.color = color; } /** * 开车 */ public void drive() { System.out.println(\"Drive the \" + color + \" \" + brand + \"'s Car.\" ); } } bean.xml\n\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e ",
+  "wordCount" : "1981",
+  "inLanguage": "en",
+  "datePublished": "2022-11-18T00:07:49+08:00",
+  "dateModified": "2022-11-18T00:07:49+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Mingyu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://www.lmingyu.tech/posts/tech/spring-%E5%88%9B%E5%BB%BAbean%E7%9A%84%E6%96%B9%E5%BC%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mingyu's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://www.lmingyu.tech/img/top.webp"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://www.lmingyu.tech" accesskey="h" title="Mingyu&#39;s Blog (Alt + H)">Mingyu&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://www.lmingyu.tech/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.lmingyu.tech/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+    <header class="post-header">
+        <div class="breadcrumbs"><a href="http://www.lmingyu.tech">Home</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/">📚文章</a>&nbsp;»&nbsp;<a href="http://www.lmingyu.tech/posts/tech/">💻 技术</a></div>
+        <h1 class="post-title">
+            Spring-创建Bean的方式
+        </h1>
+        <div class="post-meta">
+
+
+
+
+
+
+
+
+
+
+创建:&nbsp;<span title='2022-11-18 00:07:49 +0800 +0800'>2022-11-18</span>&nbsp;|&nbsp;更新:&nbsp;2022-11-18&nbsp;|&nbsp;字数:&nbsp;1981&nbsp;字&nbsp;|&nbsp;阅读约耗时: 4&nbsp;分钟&nbsp;|&nbsp;
+作者:&nbsp;Mingyu
+
+|&nbsp;本文被浏览了&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;次
+        </div>
+    </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
+
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e5%ae%b9%e5%99%a8%e7%9a%84%e5%88%9b%e9%80%a0" aria-label="容器的创造">容器的创造</a><ul>
+                            
+                    <li>
+                        <a href="#beanfactory" aria-label="BeanFactory">BeanFactory</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%ae%9a%e4%b9%89" aria-label="定义">定义</a></li>
+                    <li>
+                        <a href="#%e7%a4%ba%e4%be%8b" aria-label="示例">示例</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#applicationcontext" aria-label="ApplicationContext">ApplicationContext</a><ul>
+                            
+                    <li>
+                        <a href="#%e7%a4%ba%e4%be%8b-1" aria-label="示例">示例</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#beanfactory-%e4%b8%8e-applicationcontext-%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="BeanFactory 与 ApplicationContext 的区别">BeanFactory 与 ApplicationContext 的区别</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e8%8e%b7%e5%8f%96-bean-%e7%9a%84%e6%96%b9%e5%bc%8f" aria-label="获取 Bean 的方式">获取 Bean 的方式</a><ul>
+                            
+                    <li>
+                        <a href="#%e9%80%9a%e8%bf%87bean-id-%e8%8e%b7%e5%8f%96" aria-label="通过Bean id 获取">通过Bean id 获取</a></li>
+                    <li>
+                        <a href="#%e9%80%9a%e8%bf%87%e7%b1%bb%e5%9e%8b%e8%8e%b7%e5%8f%96" aria-label="通过类型获取">通过类型获取</a></li>
+                    <li>
+                        <a href="#%e9%80%9a%e8%bf%87-bean-id-%e5%92%8c-%e7%b1%bb%e5%9e%8b%e8%8e%b7%e5%8f%96-bean" aria-label="通过 Bean id 和 类型获取 Bean">通过 Bean id 和 类型获取 Bean</a></li>
+                    <li>
+                        <a href="#%e9%80%9a%e8%bf%87%e6%8e%a5%e5%8f%a3%e6%88%96%e7%b1%bb%e8%8e%b7%e5%8f%96bean" aria-label="通过接口或类获取Bean">通过接口或类获取Bean</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99" aria-label="参考资料">参考资料</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
+    <div class="post-content"><blockquote>
+<p>Spring 的学习笔记——创建 Bean 的方式，本文代码存放在 <a href="https://github.com/lmingyul/springlearn">github 仓库</a>中</p>
+</blockquote>
+<h1 id="容器的创造">容器的创造<a hidden class="anchor" aria-hidden="true" href="#容器的创造">#</a></h1>
+<p>如果我们想搞清楚 Bean 是如何创建的，首先得找到创建 Bean 的人——也就是 Spring 容器（创建和管理 Bean 的地方)</p>
+<p>而在 Spring 容器中起到关键作用的就是这 2 个角色： BeanFactory、ApplicationContext，这 2 个都可以代表 Spring 容器</p>
+<h2 id="beanfactory">BeanFactory<a hidden class="anchor" aria-hidden="true" href="#beanfactory">#</a></h2>
+<h3 id="定义">定义<a hidden class="anchor" aria-hidden="true" href="#定义">#</a></h3>
+<p><strong>BeanFactory 是创建、管理各种类对象的通用工厂</strong></p>
+<p>BeanFactory 接口在 Spring 中有多种实现，最常用的是 <code>XmlBeanDefinitionReader</code>、<code>DefaultListableBeanfactory</code>，通过 BeanFactory 的 <code>getBean()</code> 方法可以把 Bean 创建出来</p>
+<h3 id="示例">示例<a hidden class="anchor" aria-hidden="true" href="#示例">#</a></h3>
+<p><strong>Car: 要被创建的 Bean</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * 车
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/10/30
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Car</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     * 品牌
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">brand</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     * 颜色
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">color</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     * 空参构造
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#000">Car</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     * 有参构造
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#000">Car</span><span style="color:#000">(</span><span style="color:#000">String</span> <span style="color:#000">brand</span><span style="color:#000">,</span> <span style="color:#000">String</span> <span style="color:#000">color</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">brand</span> <span style="color:#000">=</span> <span style="color:#000">brand</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">color</span> <span style="color:#000">=</span> <span style="color:#000">color</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     * 开车
+</span></span></span><span style="display:flex;"><span><span style="color:#177500">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">drive</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Drive the &#34;</span> <span style="color:#000">+</span> <span style="color:#000">color</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; &#34;</span> <span style="color:#000">+</span> <span style="color:#000">brand</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;&#39;s Car.&#34;</span> <span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>bean.xml</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#633820">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;beans</span> <span style="color:#836c28">xmlns=</span><span style="color:#c41a16">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#836c28">xmlns:xsi=</span><span style="color:#c41a16">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#836c28">xsi:schemaLocation=</span><span style="color:#c41a16">&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;car&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;Car&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;Tesla&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;White&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p><strong>Test.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">org.springframework.beans.factory.support.DefaultListableBeanFactory</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">org.springframework.beans.factory.xml.XmlBeanDefinitionReader</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">org.springframework.core.io.ClassPathResource</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/10/30
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 搜索类加载路径下的 beans.xml 文件创建 Resource 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">ClassPathResource</span> <span style="color:#000">classPathResource</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ClassPathResource</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beans.xml&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 创建出默认的 BeanFactory 容器
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">DefaultListableBeanFactory</span> <span style="color:#000">beanFactory</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">DefaultListableBeanFactory</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 让默认的 BeanFactory 容器加载 classPathResource 对应的 XML 配置文件
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">XmlBeanDefinitionReader</span> <span style="color:#000">reader</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">XmlBeanDefinitionReader</span><span style="color:#000">(</span><span style="color:#000">beanFactory</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">reader</span><span style="color:#000">.</span><span style="color:#836c28">loadBeanDefinitions</span><span style="color:#000">(</span><span style="color:#000">classPathResource</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;----- init BeanFactory -----&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Car</span> <span style="color:#000">car</span> <span style="color:#000">=</span> <span style="color:#000">beanFactory</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;car&#34;</span><span style="color:#000">,</span> <span style="color:#000">Car</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;----- car bean is ready for use -----&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">car</span><span style="color:#000">.</span><span style="color:#836c28">drive</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">-----</span> <span style="color:#000">init</span> <span style="color:#000">BeanFactory</span> <span style="color:#000">-----</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">-----</span> <span style="color:#000">car</span> <span style="color:#000">bean</span> <span style="color:#000">is</span> <span style="color:#000">ready</span> <span style="color:#a90d91">for</span> <span style="color:#000">use</span> <span style="color:#000">-----</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Drive</span> <span style="color:#000">the</span> <span style="color:#000">White</span> <span style="color:#000">Tesla</span><span style="color:#000">&#39;</span><span style="color:#000">s</span> <span style="color:#000">Car</span><span style="color:#000">.</span>
+</span></span></code></pre></div><p>这个过程中</p>
+<ol>
+<li>首先<code>XmlBeanDefinitionReader</code> 通过 <code>Rsesource</code> 装载 Spring 配置信息并启动 IOC 容器</li>
+<li>然后再通过<code>BeanFactory</code> 方法从 IOC 容器中获取 Bean</li>
+</ol>
+<h2 id="applicationcontext">ApplicationContext<a hidden class="anchor" aria-hidden="true" href="#applicationcontext">#</a></h2>
+<blockquote>
+<p>ApplicationContext 是由 BeanFactory 派生而来，提供了更多面向实际应用的功能，在大多数的情况下，都是使用 ApliacationContext 实例作为 Spring 容器</p>
+</blockquote>
+<p>ApplicationContext 的初始化与 BeanFactory 的初始化类似</p>
+<ul>
+<li>如果 配置文件在类路径下，可以优先使用 <code>ClassPathXmlApplicationContext</code> 实现类</li>
+<li>如果 配置文件在文件系统路径下，可以优先使用 <code>FileSystemXmlApplicationContext</code> 实现类</li>
+</ul>
+<h3 id="示例-1">示例<a hidden class="anchor" aria-hidden="true" href="#示例-1">#</a></h3>
+<p><strong>Test.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">package</span> <span style="color:#000">tech.mingyu</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">org.springframework.context.support.ClassPathXmlApplicationContext</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/10/30
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">ClassPathXmlApplicationContext</span> <span style="color:#000">applicationContext</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ClassPathXmlApplicationContext</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beans.xml&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;----- init BeanFactory -----&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">Car</span> <span style="color:#000">car</span> <span style="color:#000">=</span> <span style="color:#000">applicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;car&#34;</span><span style="color:#000">,</span> <span style="color:#000">Car</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;----- car bean is ready for use -----&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">car</span><span style="color:#000">.</span><span style="color:#836c28">drive</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">-----</span> <span style="color:#000">init</span> <span style="color:#000">BeanFactory</span> <span style="color:#000">-----</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">-----</span> <span style="color:#000">car</span> <span style="color:#000">bean</span> <span style="color:#000">is</span> <span style="color:#000">ready</span> <span style="color:#a90d91">for</span> <span style="color:#000">use</span> <span style="color:#000">-----</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Drive</span> <span style="color:#000">the</span> <span style="color:#000">White</span> <span style="color:#000">Tesla</span><span style="color:#000">&#39;</span><span style="color:#000">s</span> <span style="color:#000">Car</span><span style="color:#000">.</span>
+</span></span></code></pre></div><h2 id="beanfactory-与-applicationcontext-的区别">BeanFactory 与 ApplicationContext 的区别<a hidden class="anchor" aria-hidden="true" href="#beanfactory-与-applicationcontext-的区别">#</a></h2>
+<p>ApplicationContext 支持 BeanFactory 全部功能，而且还具备额外的功能：</p>
+<ul>
+<li>初始化
+<ul>
+<li>BeanFactory 在初始化容器时，并没有实例化 Bean ，只有在第一次访问某个 Bean 时才实例化 Bean</li>
+<li>ApplicationContext 会默认在初始化应用上下文时就实例化所有单例（singleton） Bean，因此 ApplicationContext 的初始化耗时会比 BeanFactory 稍长一些，但程序后面获取实例 Bean 时就会有较好的性能也可以通过配置取消预初始化</li>
+</ul>
+</li>
+<li>提供国际化支持</li>
+<li>资源访问</li>
+<li>事件机制</li>
+<li>同时加载多个配置文件</li>
+</ul>
+<p>建议优先使用 ApplicationContext，只有对某些内存非常关键的应用，才考虑使用 BeanFactory</p>
+<p>容器创建好了，就可以通过容器创建出对象 Bean</p>
+<hr>
+<h1 id="获取-bean-的方式">获取 Bean 的方式<a hidden class="anchor" aria-hidden="true" href="#获取-bean-的方式">#</a></h1>
+<h2 id="通过bean-id-获取">通过Bean id 获取<a hidden class="anchor" aria-hidden="true" href="#通过bean-id-获取">#</a></h2>
+<p><strong>Cat.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">package</span> <span style="color:#000">tech.mingyu</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.AllArgsConstructor</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.Data</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.NoArgsConstructor</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/11/20
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@NoArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@AllArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Cat</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">name</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">age</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">sayHello</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;The &#34;</span> <span style="color:#000">+</span> <span style="color:#000">name</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; Cat is &#34;</span> <span style="color:#000">+</span> <span style="color:#000">age</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; years old!&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>beans.xml</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#633820">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;beans</span> <span style="color:#836c28">xmlns=</span><span style="color:#c41a16">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#836c28">xmlns:xsi=</span><span style="color:#c41a16">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#836c28">xsi:schemaLocation=</span><span style="color:#c41a16">&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;beanOne&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;tech.mingyu.Cat&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;kitty&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;3&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p><strong>Test.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">package</span> <span style="color:#000">tech.mingyu</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">org.springframework.context.support.ClassPathXmlApplicationContext</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/11/20
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">ClassPathXmlApplicationContext</span> <span style="color:#000">applicationContext</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ClassPathXmlApplicationContext</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beans.xml&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 通过 Bean id 获取对象
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">Cat</span> <span style="color:#000">cat</span> <span style="color:#000">=</span> <span style="color:#000">(</span><span style="color:#000">Cat</span><span style="color:#000">)</span> <span style="color:#000">applicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beanOne&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">cat</span><span style="color:#000">.</span><span style="color:#836c28">sayHello</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">The</span> <span style="color:#000">kitty</span> <span style="color:#000">Cat</span> <span style="color:#000">is</span> <span style="color:#000">3</span> <span style="color:#000">years</span> <span style="color:#000">old</span><span style="color:#000">!</span>
+</span></span></code></pre></div><p>在 Spring 容器中，id 是唯一标识，可以通过 Bean id 来确定并创建出唯一的 Bean 对象，但是这个 Bean id 是不允许重复的，否则会报异常</p>
+<h2 id="通过类型获取">通过类型获取<a hidden class="anchor" aria-hidden="true" href="#通过类型获取">#</a></h2>
+<p>除了 id ，还可以通过 Bean 类型创建出 Bean 对象</p>
+<p>如下：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">ClassPathXmlApplicationContext</span> <span style="color:#000">applicationContext</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ClassPathXmlApplicationContext</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beans.xml&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 通过 Bean id 获取对象
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">Cat</span> <span style="color:#000">cat</span> <span style="color:#000">=</span> <span style="color:#000">(</span><span style="color:#000">Cat</span><span style="color:#000">)</span> <span style="color:#000">applicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beanOne&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">cat</span><span style="color:#000">.</span><span style="color:#836c28">sayHello</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;----- 分割线 -----&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 通过 Bean 类型获取对象
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">Cat</span> <span style="color:#000">cat2</span> <span style="color:#000">=</span> <span style="color:#000">applicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#000">Cat</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">cat2</span><span style="color:#000">.</span><span style="color:#836c28">sayHello</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">The</span> <span style="color:#000">kitty</span> <span style="color:#000">Cat</span> <span style="color:#000">is</span> <span style="color:#000">3</span> <span style="color:#000">years</span> <span style="color:#000">old</span><span style="color:#000">!</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">-----</span> <span style="color:#000">分割线</span> <span style="color:#000">-----</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">The</span> <span style="color:#000">kitty</span> <span style="color:#000">Cat</span> <span style="color:#000">is</span> <span style="color:#000">3</span> <span style="color:#000">years</span> <span style="color:#000">old</span><span style="color:#000">!</span>
+</span></span></code></pre></div><p>可以看出输出结果都是一样的，那这两种方式有什么区别呢？</p>
+<ul>
+<li>第一种情况：假设出现两个 Bean 的类型都一样的情况，那么采用 Bean 类型创建 Bean 就会导致报错：<code>NoUniqueBeanDefinitionException: No qualifying bean of type 'tech.mingyu.Cat' available: expected single matching bean but found 2: beanOne,beanTwo</code> ，这是因为同类型的 Bean 存在 2 个及以上，Spring 容器在初始化的时候无法分辨出哪一个 Bean 是需要被创建出来的。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;beanOne&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;tech.mingyu.Cat&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;kitty&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;3&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;beanTwo&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;tech.mingyu.Cat&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;Bady&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;5&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">The</span> <span style="color:#000">kitty</span> <span style="color:#000">Cat</span> <span style="color:#000">is</span> <span style="color:#000">3</span> <span style="color:#000">years</span> <span style="color:#000">old</span><span style="color:#000">!</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">-----</span> <span style="color:#000">分割线</span> <span style="color:#000">-----</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">Exception</span> <span style="color:#000">in</span> <span style="color:#000">thread</span> <span style="color:#c41a16">&#34;main&#34;</span> <span style="color:#000">org</span><span style="color:#000">.</span><span style="color:#836c28">springframework</span><span style="color:#000">.</span><span style="color:#836c28">beans</span><span style="color:#000">.</span><span style="color:#836c28">factory</span><span style="color:#000">.</span><span style="color:#836c28">NoUniqueBeanDefinitionException</span><span style="color:#000">:</span> <span style="color:#000">No</span> <span style="color:#000">qualifying</span> <span style="color:#000">bean</span> <span style="color:#000">of</span> <span style="color:#000">type</span> <span style="color:#000">&#39;</span><span style="color:#000">tech</span><span style="color:#000">.</span><span style="color:#836c28">mingyu</span><span style="color:#000">.</span><span style="color:#836c28">Cat</span><span style="color:#000">&#39;</span> <span style="color:#000">available</span><span style="color:#000">:</span> <span style="color:#000">expected</span> <span style="color:#000">single</span> <span style="color:#000">matching</span> <span style="color:#000">bean</span> <span style="color:#000">but</span> <span style="color:#000">found</span> <span style="color:#000">2</span><span style="color:#000">:</span> <span style="color:#000">beanOne</span><span style="color:#000">,</span><span style="color:#000">beanTwo</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">at</span> <span style="color:#000">org</span><span style="color:#000">.</span><span style="color:#836c28">springframework</span><span style="color:#000">.</span><span style="color:#836c28">beans</span><span style="color:#000">.</span><span style="color:#836c28">factory</span><span style="color:#000">.</span><span style="color:#836c28">support</span><span style="color:#000">.</span><span style="color:#836c28">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">resolveNamedBean</span><span style="color:#000">(</span><span style="color:#000">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">java</span><span style="color:#000">:</span><span style="color:#000">1273</span><span style="color:#000">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">at</span> <span style="color:#000">org</span><span style="color:#000">.</span><span style="color:#836c28">springframework</span><span style="color:#000">.</span><span style="color:#836c28">beans</span><span style="color:#000">.</span><span style="color:#836c28">factory</span><span style="color:#000">.</span><span style="color:#836c28">support</span><span style="color:#000">.</span><span style="color:#836c28">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">resolveBean</span><span style="color:#000">(</span><span style="color:#000">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">java</span><span style="color:#000">:</span><span style="color:#000">494</span><span style="color:#000">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">at</span> <span style="color:#000">org</span><span style="color:#000">.</span><span style="color:#836c28">springframework</span><span style="color:#000">.</span><span style="color:#836c28">beans</span><span style="color:#000">.</span><span style="color:#836c28">factory</span><span style="color:#000">.</span><span style="color:#836c28">support</span><span style="color:#000">.</span><span style="color:#836c28">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#000">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">java</span><span style="color:#000">:</span><span style="color:#000">349</span><span style="color:#000">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">at</span> <span style="color:#000">org</span><span style="color:#000">.</span><span style="color:#836c28">springframework</span><span style="color:#000">.</span><span style="color:#836c28">beans</span><span style="color:#000">.</span><span style="color:#836c28">factory</span><span style="color:#000">.</span><span style="color:#836c28">support</span><span style="color:#000">.</span><span style="color:#836c28">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#000">DefaultListableBeanFactory</span><span style="color:#000">.</span><span style="color:#836c28">java</span><span style="color:#000">:</span><span style="color:#000">342</span><span style="color:#000">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">at</span> <span style="color:#000">org</span><span style="color:#000">.</span><span style="color:#836c28">springframework</span><span style="color:#000">.</span><span style="color:#836c28">context</span><span style="color:#000">.</span><span style="color:#836c28">support</span><span style="color:#000">.</span><span style="color:#836c28">AbstractApplicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#000">AbstractApplicationContext</span><span style="color:#000">.</span><span style="color:#836c28">java</span><span style="color:#000">:</span><span style="color:#000">1172</span><span style="color:#000">)</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000">at</span> <span style="color:#000">tech</span><span style="color:#000">.</span><span style="color:#836c28">mingyu</span><span style="color:#000">.</span><span style="color:#836c28">Test</span><span style="color:#000">.</span><span style="color:#836c28">main</span><span style="color:#000">(</span><span style="color:#000">Test</span><span style="color:#000">.</span><span style="color:#836c28">java</span><span style="color:#000">:</span><span style="color:#000">21</span><span style="color:#000">)</span>
+</span></span></code></pre></div><h2 id="通过-bean-id-和-类型获取-bean">通过 Bean id 和 类型获取 Bean<a hidden class="anchor" aria-hidden="true" href="#通过-bean-id-和-类型获取-bean">#</a></h2>
+<p>如果一个类型的 Bean 有多个，而且非要通过对象类型获取 Bean，就可以通过第三种方式获取</p>
+<p><strong>Test.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#177500">// 同时通过 Bean id 与 类型获取对象
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span><span style="color:#000">Cat</span> <span style="color:#000">cat</span> <span style="color:#000">=</span> <span style="color:#000">applicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beanTwo&#34;</span><span style="color:#000">,</span> <span style="color:#000">Cat</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">cat</span><span style="color:#000">.</span><span style="color:#836c28">sayHello</span><span style="color:#000">();</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">The</span> <span style="color:#000">Bady</span> <span style="color:#000">Cat</span> <span style="color:#000">is</span> <span style="color:#000">5</span> <span style="color:#000">years</span> <span style="color:#000">old</span><span style="color:#000">!</span>
+</span></span></code></pre></div><h2 id="通过接口或类获取bean">通过接口或类获取Bean<a hidden class="anchor" aria-hidden="true" href="#通过接口或类获取bean">#</a></h2>
+<p>如果你需要获取的 Bean 实现了某个接口，获取继承了某个类，可以将获取的 Bean 可以直接设置为接口的类型或父类的类型</p>
+<p><strong>示例</strong></p>
+<p><strong>Dog.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">package</span> <span style="color:#000">tech.mingyu</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.AllArgsConstructor</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.Data</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.NoArgsConstructor</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/11/20
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@NoArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@AllArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Dog</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Animal</span><span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">name</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">age</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">sayHello</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;The &#34;</span> <span style="color:#000">+</span> <span style="color:#000">name</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; Dog is &#34;</span> <span style="color:#000">+</span> <span style="color:#000">age</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; years old!&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>Animal.java</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a90d91">package</span> <span style="color:#000">tech.mingyu</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.Data</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">import</span> <span style="color:#000">lombok.NoArgsConstructor</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/11/23
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@NoArgsConstructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Animal</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">gender</span><span style="color:#000">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">eat</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Animal is eating something!&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>beans.xml</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#633820">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;beans</span> <span style="color:#836c28">xmlns=</span><span style="color:#c41a16">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#836c28">xmlns:xsi=</span><span style="color:#c41a16">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#836c28">xsi:schemaLocation=</span><span style="color:#c41a16">&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;beanOne&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;tech.mingyu.Cat&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;kitty&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;3&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;beanTwo&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;tech.mingyu.Cat&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;Bady&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;5&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;bean</span> <span style="color:#836c28">id=</span><span style="color:#c41a16">&#34;beanThree&#34;</span> <span style="color:#836c28">class=</span><span style="color:#c41a16">&#34;tech.mingyu.Dog&#34;</span><span style="color:#000">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;0&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;jack&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">&lt;constructor-arg</span> <span style="color:#836c28">index=</span><span style="color:#c41a16">&#34;1&#34;</span> <span style="color:#836c28">value=</span><span style="color:#c41a16">&#34;10&#34;</span><span style="color:#000">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">&lt;/beans&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#177500">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @author liangtaiming
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> * @date 2022/11/20
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"> **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">ClassPathXmlApplicationContext</span> <span style="color:#000">applicationContext</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ClassPathXmlApplicationContext</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;beans.xml&#34;</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#177500">// 通过父类获取 Bean
+</span></span></span><span style="display:flex;"><span><span style="color:#177500"></span>        <span style="color:#000">Animal</span> <span style="color:#000">animal</span> <span style="color:#000">=</span> <span style="color:#000">applicationContext</span><span style="color:#000">.</span><span style="color:#836c28">getBean</span><span style="color:#000">(</span><span style="color:#000">Animal</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">animal</span><span style="color:#000">.</span><span style="color:#836c28">eat</span><span style="color:#000">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">}</span>
+</span></span></code></pre></div><p><strong>输出结果</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">Animal</span> <span style="color:#000">is</span> <span style="color:#000">eating</span> <span style="color:#000">something</span><span style="color:#000">!</span>
+</span></span></code></pre></div><p>从这个可以看到，Dog 类在 beans.xml 中配置了对应类型的 Bean ，而 Animal 类并没有，但由于 Dog 类继承了 Animal 类，所以可以直接获取父类的 Bean 的对象，接口也是同样的道理。</p>
+<p>但是这种做法是有前提的：就是<strong>子类的 Bean 必须唯一</strong>，如果是 Cat 类继承了 Animal 类的话，在获取 Animal  Bean 的时候就会报错<code>Exception in thread &quot;main&quot; org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'tech.mingyu.Animal' available: expected single matching bean but found 2: beanOne,beanTwo</code></p>
+<hr>
+<h1 id="参考资料">参考资料<a hidden class="anchor" aria-hidden="true" href="#参考资料">#</a></h1>
+<ul>
+<li><!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title></title>
+    <style>
+        .post-preview {
+            max-width: 780px;
+            height: 200px;
+            margin: 1em auto;
+            position: relative;
+            display: flex;
+             
+            background: var(--entry);
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .25), 0 0 2px rgba(0, 0, 0, .25);
+        }
+
+        .dark .post-preview {
+             
+            background: var(--entry);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .5), 0 0 2px rgba(0, 0, 0, .5);
+        }
+
+        .post-preview--meta {
+            width: 80%;
+            padding: 23px;
+            overflow: hidden;
+        }
+
+        .post-preview--middle {
+            line-height: 28px;
+        }
+
+        .post-preview--title {
+            font-size: 22px;
+            margin: 0 !important;
+        }
+
+        .post-preview--title a {
+            text-decoration: none;
+        }
+
+        .post-preview--date {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .post-preview--excerpt {
+            font-size: 14px;
+            line-height: 1.825;
+        }
+
+        .post-preview--excerpt p {
+            display: inline;
+            margin: 0;
+        }
+
+        .post-preview--image {
+            height: 200px !important;
+            width: 25%;
+            float: right;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .post-preview img {
+            margin: unset;
+            width: 20%;
+            border-radius: 0 15px 15px 0;
+        }
+
+        @media (max-width: 550px) {
+            .post-preview {
+                width: 95%;
+            }
+
+            .post-preview--excerpt {
+                display: none;
+            }
+
+            .post-preview--middle {
+                line-height: 19px;
+            }
+        }
+
+        .rating {
+            display: block;
+            line-height: 15px;
+        }
+
+        .rating-star {
+            display: inline-block;
+            width: 75px;
+            height: 15px;
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAClCAYAAAAUAAAYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA5xJREFUeNrs3T9rFEEcxvG7qEQIglaCICKkin9AUEtBKxU7wS61VlYivgWj70TtNFj5BqzE7qxEWwsxKIoYn4UtluFmbm8nczvzm+/BjxyuDwNzu3uXD0+46f7LC5PA45Hm+WTYw1x2LRDc0jzTXB+wqMlsaLPutz8fDFjYZHYauAz3NBvt83XNnyUWNpn1nVm3OsHmsb3EomazzZnVXKMPNcc0xzUnNKc0Rzv/77fms+Z7O3vt9b1eU7bZrNN68l5zcolX4ofmsuZXTdnmMvyi2dR86Bmcac62P6vKrnVubpc0bxYE32nOab45N8YqsvPeDfcD4SOav4HjprPuu+H5BTt9LXDMfNbdLPfT678Fx6vKupt1o/O8+R3pkOaJ5/iktqx7z/qp+aq5q/nY+fczmheaK03Gs7D5rLtZdzSvA6/Ebc2u55j57HQB0TzW7AzkjiKzny6+2hlKNE8juMNcFqKBaIZndRlCNBBNgmx7ZkE0fbLtZkE0EA1EM17WuQwhGogGooFoss6296y52cNO+J6HLJoPaFdbsvA9zGerIxrPh85eWYgGooFoDiQbuAxp0UA0EVmdWbRo+ma1WbRoIBqIZtzsnHdDWjQQDUQD0WSbde5ZS2UhmtqJJtSEiVkXooFoIJre2VATJmZdiKZ2ogk1YSb8oVMvDeUPnSAaiCaPJkzMuhANRAPRQDQpsqEmTMy6EI11oolpwkA0EA1EcyDZmCYMRAPR+LMxTZjqiCamCQPRQDQQzehNGIgGooFoIJpVZ2OaMBBN7USTqgkD0UA0EE3vbKomDERTO9GkasKYJJpUTRiIBqKBaEZvwkA0EA1EA9GkyKZqwkA01olmrCYMRAPRQDR9LkO+0QmiKbAJUyTRjNWEgWggGohm9CYMRAPRQDQQzZDsWE0YiMYC0eTYhIFoIJrKiCbHJgxEY4FocmzCZEs0OTZhIBqIpjKiybEJA9FANBANROPL5tiEgWhKIJoSmzAQDURjjGhKbMJANCUQTYlNmNGIpsQmDEQD0RgjmhKbMBANRAPR1Es0JTZhIJpciMZaEwaigWgKJBprTRiIJheisdaESUo01powEA1EUyDRWGvCQDQQDURjm2isNWEgmlURzWw2q4pZIBqIJkOiCVyGJpkFolkV0ejMMvel28mIRptl7ku3IRqIpjCimfNuaJpZIBqIBqIpm2ice5Z5ZonJupvVkMRu4JW4qXnrOWY++1+AAQBw9BJSCTeN9wAAAABJRU5ErkJggg==);
+            overflow: hidden;
+        }
+
+        .allstar10 {
+            background-position: 0px 0px;
+        }
+
+        .allstar9 {
+            background-position: 0px -15px;
+        }
+
+        .allstar8 {
+            background-position: 0px -30px;
+        }
+
+        .allstar7 {
+            background-position: 0px -45px;
+        }
+
+        .allstar6 {
+            background-position: 0px -60px;
+        }
+
+        .allstar5 {
+            background-position: 0px -75px;
+        }
+
+        .allstar4 {
+            background-position: 0px -90px;
+        }
+
+        .allstar3 {
+            background-position: 0px -105px;
+        }
+
+        .allstar2 {
+            background-position: 0px -120px;
+        }
+
+        .allstar1 {
+            background-position: 0px -135px;
+        }
+
+        .allstar0 {
+            background-position: 0px -150px;
+        }
+
+
+        .rating-average {
+            color: #777;
+            display: inline-block;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.douban_item').each(function () {
+                var _this = $(this);
+                var strs = _this.attr('urlstring').toString();
+                var db_reg = /^https\:\/\/(movie|book)\.douban\.com\/subject\/([0-9]+)\/?/;
+                if (db_reg.test(strs)) {
+                    var db_type = strs.replace(db_reg, "$1");
+                    var db_id = strs.replace(db_reg, "$2").toString();
+                    var db_api = "https://douban.edui.fun/";
+                    if (db_type === 'movie') {
+                        var ls_item = 'movie' + db_id;
+                        var url = db_api + "movies/" + db_id;
+                        if (localStorage.getItem(ls_item) == null || localStorage.getItem(ls_item) === 'undefined') {
+                            $.ajax({
+                                url: url, type: 'GET', dataType: "json", success: function (data) {
+                                    localStorage.setItem(ls_item, JSON.stringify(data));
+                                    movieShow(_this, ls_item, strs)
+                                }
+                            })
+                        } else {
+                            movieShow(_this, ls_item, strs)
+                        }
+                    } else if (db_type === 'book') {
+                        var ls_item = 'book' + db_id;
+                        var url = db_api + "v2/book/id/" + db_id;
+                        if (localStorage.getItem(ls_item) == null || localStorage.getItem(ls_item) === 'undefined') {
+                            $.ajax({
+                                url: url, type: 'GET', dataType: 'json', success: function (data) {
+                                    localStorage.setItem('book' + db_id, JSON.stringify(data));
+                                    bookShow(_this, ls_item, strs)
+                                }
+                            })
+                        } else {
+                            bookShow(_this, ls_item, strs)
+                        }
+                    }
+                }
+            });
+        });
+
+        function movieShow(_this, ls_item, str) {
+            var storage = localStorage.getItem(ls_item);
+            var data = JSON.parse(storage);
+            var db_star = Math.ceil(data.rating);
+            $("<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><div class='post-preview--title'><a target='_blank' style='box-shadow: none; font-weight: bolder;' href='" + str + "'>" + data.name + "</a></div><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating + "</div></div><time class='post-preview--date'>导演：" + data.director + " / 类型：" + data.genre + " / " + data.year + "</time><section style='max-height:75px;overflow:hidden;' class='post-preview--excerpt'>" + data.intro.replace(/\s*/g, "") + "</section></div></div><img referrerpolicy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.img + "></div>").replaceAll(_this)
+        }
+
+        function bookShow(_this, ls_item, str) {
+            var storage = localStorage.getItem(ls_item);
+            var data = JSON.parse(storage);
+            var db_star = Math.ceil(data.rating.average);
+            $("<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><div class='post-preview--title'><a target='_blank' style='box-shadow: none; font-weight: bolder;' href='" + str + "'>" + data.title + "</a></div><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating.average + "</div></div><time class='post-preview--date'>作者：" + data.author + " / 出版："+ data.pubdate +" / "+ data.publisher +" </time><section style='max-height:75px;overflow:hidden;' class='post-preview--excerpt'>" + data.summary.replace(/\s*/g, "") + "</section></div></div><img referrerpolicy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.images.medium + "></div>").replaceAll(_this)
+        }
+    </script>
+</head>
+<body>
+<div class="douban_show">
+    <div id="dbhttps://book.douban.com/subject/35028233/" urlstring="https://book.douban.com/subject/35028233/" class="douban_item post-preview"></div>
+</div>
+</body>
+</html></li>
+<li><!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title></title>
+    <style>
+        .post-preview {
+            max-width: 780px;
+            height: 200px;
+            margin: 1em auto;
+            position: relative;
+            display: flex;
+             
+            background: var(--entry);
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .25), 0 0 2px rgba(0, 0, 0, .25);
+        }
+
+        .dark .post-preview {
+             
+            background: var(--entry);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .5), 0 0 2px rgba(0, 0, 0, .5);
+        }
+
+        .post-preview--meta {
+            width: 80%;
+            padding: 23px;
+            overflow: hidden;
+        }
+
+        .post-preview--middle {
+            line-height: 28px;
+        }
+
+        .post-preview--title {
+            font-size: 22px;
+            margin: 0 !important;
+        }
+
+        .post-preview--title a {
+            text-decoration: none;
+        }
+
+        .post-preview--date {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .post-preview--excerpt {
+            font-size: 14px;
+            line-height: 1.825;
+        }
+
+        .post-preview--excerpt p {
+            display: inline;
+            margin: 0;
+        }
+
+        .post-preview--image {
+            height: 200px !important;
+            width: 25%;
+            float: right;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .post-preview img {
+            margin: unset;
+            width: 20%;
+            border-radius: 0 15px 15px 0;
+        }
+
+        @media (max-width: 550px) {
+            .post-preview {
+                width: 95%;
+            }
+
+            .post-preview--excerpt {
+                display: none;
+            }
+
+            .post-preview--middle {
+                line-height: 19px;
+            }
+        }
+
+        .rating {
+            display: block;
+            line-height: 15px;
+        }
+
+        .rating-star {
+            display: inline-block;
+            width: 75px;
+            height: 15px;
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAClCAYAAAAUAAAYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA5xJREFUeNrs3T9rFEEcxvG7qEQIglaCICKkin9AUEtBKxU7wS61VlYivgWj70TtNFj5BqzE7qxEWwsxKIoYn4UtluFmbm8nczvzm+/BjxyuDwNzu3uXD0+46f7LC5PA45Hm+WTYw1x2LRDc0jzTXB+wqMlsaLPutz8fDFjYZHYauAz3NBvt83XNnyUWNpn1nVm3OsHmsb3EomazzZnVXKMPNcc0xzUnNKc0Rzv/77fms+Z7O3vt9b1eU7bZrNN68l5zcolX4ofmsuZXTdnmMvyi2dR86Bmcac62P6vKrnVubpc0bxYE32nOab45N8YqsvPeDfcD4SOav4HjprPuu+H5BTt9LXDMfNbdLPfT678Fx6vKupt1o/O8+R3pkOaJ5/iktqx7z/qp+aq5q/nY+fczmheaK03Gs7D5rLtZdzSvA6/Ebc2u55j57HQB0TzW7AzkjiKzny6+2hlKNE8juMNcFqKBaIZndRlCNBBNgmx7ZkE0fbLtZkE0EA1EM17WuQwhGogGooFoss6296y52cNO+J6HLJoPaFdbsvA9zGerIxrPh85eWYgGooFoDiQbuAxp0UA0EVmdWbRo+ma1WbRoIBqIZtzsnHdDWjQQDUQD0WSbde5ZS2UhmtqJJtSEiVkXooFoIJre2VATJmZdiKZ2ogk1YSb8oVMvDeUPnSAaiCaPJkzMuhANRAPRQDQpsqEmTMy6EI11oolpwkA0EA1EcyDZmCYMRAPR+LMxTZjqiCamCQPRQDQQzehNGIgGooFoIJpVZ2OaMBBN7USTqgkD0UA0EE3vbKomDERTO9GkasKYJJpUTRiIBqKBaEZvwkA0EA1EA9GkyKZqwkA01olmrCYMRAPRQDR9LkO+0QmiKbAJUyTRjNWEgWggGohm9CYMRAPRQDQQzZDsWE0YiMYC0eTYhIFoIJrKiCbHJgxEY4FocmzCZEs0OTZhIBqIpjKiybEJA9FANBANROPL5tiEgWhKIJoSmzAQDURjjGhKbMJANCUQTYlNmNGIpsQmDEQD0RgjmhKbMBANRAPR1Es0JTZhIJpciMZaEwaigWgKJBprTRiIJheisdaESUo01powEA1EUyDRWGvCQDQQDURjm2isNWEgmlURzWw2q4pZIBqIJkOiCVyGJpkFolkV0ejMMvel28mIRptl7ku3IRqIpjCimfNuaJpZIBqIBqIpm2ice5Z5ZonJupvVkMRu4JW4qXnrOWY++1+AAQBw9BJSCTeN9wAAAABJRU5ErkJggg==);
+            overflow: hidden;
+        }
+
+        .allstar10 {
+            background-position: 0px 0px;
+        }
+
+        .allstar9 {
+            background-position: 0px -15px;
+        }
+
+        .allstar8 {
+            background-position: 0px -30px;
+        }
+
+        .allstar7 {
+            background-position: 0px -45px;
+        }
+
+        .allstar6 {
+            background-position: 0px -60px;
+        }
+
+        .allstar5 {
+            background-position: 0px -75px;
+        }
+
+        .allstar4 {
+            background-position: 0px -90px;
+        }
+
+        .allstar3 {
+            background-position: 0px -105px;
+        }
+
+        .allstar2 {
+            background-position: 0px -120px;
+        }
+
+        .allstar1 {
+            background-position: 0px -135px;
+        }
+
+        .allstar0 {
+            background-position: 0px -150px;
+        }
+
+
+        .rating-average {
+            color: #777;
+            display: inline-block;
+            font-size: 13px;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.douban_item').each(function () {
+                var _this = $(this);
+                var strs = _this.attr('urlstring').toString();
+                var db_reg = /^https\:\/\/(movie|book)\.douban\.com\/subject\/([0-9]+)\/?/;
+                if (db_reg.test(strs)) {
+                    var db_type = strs.replace(db_reg, "$1");
+                    var db_id = strs.replace(db_reg, "$2").toString();
+                    var db_api = "https://douban.edui.fun/";
+                    if (db_type === 'movie') {
+                        var ls_item = 'movie' + db_id;
+                        var url = db_api + "movies/" + db_id;
+                        if (localStorage.getItem(ls_item) == null || localStorage.getItem(ls_item) === 'undefined') {
+                            $.ajax({
+                                url: url, type: 'GET', dataType: "json", success: function (data) {
+                                    localStorage.setItem(ls_item, JSON.stringify(data));
+                                    movieShow(_this, ls_item, strs)
+                                }
+                            })
+                        } else {
+                            movieShow(_this, ls_item, strs)
+                        }
+                    } else if (db_type === 'book') {
+                        var ls_item = 'book' + db_id;
+                        var url = db_api + "v2/book/id/" + db_id;
+                        if (localStorage.getItem(ls_item) == null || localStorage.getItem(ls_item) === 'undefined') {
+                            $.ajax({
+                                url: url, type: 'GET', dataType: 'json', success: function (data) {
+                                    localStorage.setItem('book' + db_id, JSON.stringify(data));
+                                    bookShow(_this, ls_item, strs)
+                                }
+                            })
+                        } else {
+                            bookShow(_this, ls_item, strs)
+                        }
+                    }
+                }
+            });
+        });
+
+        function movieShow(_this, ls_item, str) {
+            var storage = localStorage.getItem(ls_item);
+            var data = JSON.parse(storage);
+            var db_star = Math.ceil(data.rating);
+            $("<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><div class='post-preview--title'><a target='_blank' style='box-shadow: none; font-weight: bolder;' href='" + str + "'>" + data.name + "</a></div><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating + "</div></div><time class='post-preview--date'>导演：" + data.director + " / 类型：" + data.genre + " / " + data.year + "</time><section style='max-height:75px;overflow:hidden;' class='post-preview--excerpt'>" + data.intro.replace(/\s*/g, "") + "</section></div></div><img referrerpolicy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.img + "></div>").replaceAll(_this)
+        }
+
+        function bookShow(_this, ls_item, str) {
+            var storage = localStorage.getItem(ls_item);
+            var data = JSON.parse(storage);
+            var db_star = Math.ceil(data.rating.average);
+            $("<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><div class='post-preview--title'><a target='_blank' style='box-shadow: none; font-weight: bolder;' href='" + str + "'>" + data.title + "</a></div><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating.average + "</div></div><time class='post-preview--date'>作者：" + data.author + " / 出版："+ data.pubdate +" / "+ data.publisher +" </time><section style='max-height:75px;overflow:hidden;' class='post-preview--excerpt'>" + data.summary.replace(/\s*/g, "") + "</section></div></div><img referrerpolicy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.images.medium + "></div>").replaceAll(_this)
+        }
+    </script>
+</head>
+<body>
+<div class="douban_show">
+    <div id="dbhttps://book.douban.com/subject/26952826/" urlstring="https://book.douban.com/subject/26952826/" class="douban_item post-preview"></div>
+</div>
+</body>
+</html></li>
+</ul>
+
+    </div>
+
+    <footer class="post-footer">
+        <ul class="post-tags">
+            <li><a href="http://www.lmingyu.tech/tags/spring/">Spring</a></li>
+            <li><a href="http://www.lmingyu.tech/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+        </ul>
+<nav class="paginav">
+  <a class="next" href="http://www.lmingyu.tech/posts/summary/2022-10%E6%9C%88%E5%BA%A6%E5%9B%9E%E9%A1%BE/">
+    <span class="title">Next »</span>
+    <br>
+    <span>2022 10月度回顾</span>
+  </a>
+</nav>
+
+    </footer><script src="https://utteranc.es/client.js"
+        repo="lmingyul/lmingyul.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>Mingyu</span>
+    <span>
+        <a href="http://beian.miit.gov.cn" target="_blank" style="color: #939393">粤ICP备2022085443号</a>
+    </span>
+    <span id="busuanzi_container_site_pv">
+        本站点击访问量：<span id="busuanzi_value_site_pv"></span>次，&nbsp;欢迎👏🏻！！！
+        </span>
+
+
+
+
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <img src="/img/rocket.webp" alt="top">
+
+
+
+
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) {
+            }
+            ;
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
